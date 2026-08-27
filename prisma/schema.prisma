@@ -1,0 +1,176 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum Role {
+  REPORTER
+  DEVELOPER
+  QA
+  PROJECT_MANAGER
+  ADMIN
+}
+
+enum Severity {
+  LOW
+  MEDIUM
+  HIGH
+  CRITICAL
+}
+
+enum Priority {
+  LOW
+  MEDIUM
+  HIGH
+  URGENT
+}
+
+enum IssueStatus {
+  NEW
+  TRIAGED
+  ASSIGNED
+  IN_PROGRESS
+  RESOLVED
+  VERIFICATION
+  CLOSED
+}
+
+model User {
+  id            String         @id @default(uuid())
+  email         String         @unique
+  passwordHash  String
+  name          String
+  role          Role           @default(REPORTER)
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  
+  // Relations
+  reportedIssues Issue[]       @relation("ReporterRelation")
+  assignedIssues Issue[]       @relation("AssigneeRelation")
+  comments       Comment[]
+  activities     Activity[]
+  savedFilters   SavedFilter[]
+  notifications  Notification[]
+  ledProjects    Project[]     @relation("ProjectLead")
+}
+
+model Project {
+  id          String      @id @default(uuid())
+  name        String      @unique
+  key         String      @unique // e.g., "PROJ", "APP"
+  description String?
+  leadId      String
+  lead        User        @relation("ProjectLead", fields: [leadId], references: [id])
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+
+  components  Component[]
+  issues      Issue[]
+}
+
+model Component {
+  id          String   @id @default(uuid())
+  name        String
+  description String?
+  projectId   String
+  project     Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  issues      Issue[]
+
+  @@unique([projectId, name])
+}
+
+model Issue {
+  id                 String       @id @default(uuid())
+  key                String       @unique // e.g., "PROJ-101"
+  title              String
+  description        String
+  stepsToReproduce   String?
+  expectedBehavior   String?
+  actualBehavior     String?
+  environment        String?      // OS, Browser, Device, Version details
+  severity           Severity     @default(MEDIUM)
+  priority           Priority     @default(MEDIUM)
+  status             IssueStatus  @default(NEW)
+  urlOccurred        String?
+  
+  // Relations
+  projectId          String
+  project            Project      @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  componentId        String?
+  component          Component?   @relation(fields: [componentId], references: [id], onDelete: SetNull)
+  
+  reporterId         String
+  reporter           User         @relation("ReporterRelation", fields: [reporterId], references: [id])
+  assigneeId         String?
+  assignee           User?        @relation("AssigneeRelation", fields: [assigneeId], references: [id], onDelete: SetNull)
+
+  createdAt          DateTime     @default(now())
+  updatedAt          DateTime     @updatedAt
+  closedAt           DateTime?
+
+  attachments        Attachment[]
+  comments           Comment[]
+  activities         Activity[]
+}
+
+model Attachment {
+  id           String   @id @default(uuid())
+  issueId      String
+  issue        Issue    @relation(fields: [issueId], references: [id], onDelete: Cascade)
+  name         String
+  url          String   // Storage URL or DB fallback base64
+  mimeType     String
+  size         Int
+  uploadedById String
+  createdAt    DateTime @default(now())
+}
+
+model Comment {
+  id        String   @id @default(uuid())
+  issueId   String
+  issue     Issue    @relation(fields: [issueId], references: [id], onDelete: Cascade)
+  authorId  String
+  author    User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  content   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Activity {
+  id        String   @id @default(uuid())
+  issueId   String
+  issue     Issue    @relation(fields: [issueId], references: [id], onDelete: Cascade)
+  actorId   String
+  actor     User     @relation(fields: [actorId], references: [id], onDelete: Cascade)
+  action    String   // e.g., "STATUS_CHANGE", "ASSIGNEE_CHANGE", "COMMENT_ADDED", "ATTACHMENT_ADDED"
+  details   String   // JSON string storing metadata like old/new values
+  createdAt DateTime @default(now())
+}
+
+model SavedFilter {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  name      String
+  query     String   // JSON string of query filters
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Notification {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title     String
+  content   String
+  isRead    Boolean  @default(false)
+  link      String?  // Click target e.g. /issues/PROJ-101
+  createdAt DateTime @default(now())
+}
