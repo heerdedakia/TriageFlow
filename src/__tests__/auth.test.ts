@@ -13,13 +13,13 @@ describe('Auth Utilities', () => {
   });
 
   it('encrypts and decrypts session data', async () => {
-    const payload = { userId: '123', role: 'ADMIN' };
+    const payload = { id: '123', email: 'test@test.com', name: 'Tester', role: 'ADMIN' as const };
     const encrypted = await encrypt(payload);
     
     expect(typeof encrypted).toBe('string');
     
     const decrypted = await decrypt(encrypted) as any;
-    expect(decrypted.userId).toBe(payload.userId);
+    expect(decrypted.id).toBe(payload.id);
     expect(decrypted.role).toBe(payload.role);
   });
 });

@@ -236,6 +236,7 @@ export default function IssuesSearchClient({
               <input
                 type="text"
                 required
+                aria-label="Filter preset name"
                 placeholder="Filter preset name..."
                 value={newFilterName}
                 onChange={(e) => setNewFilterName(e.target.value)}
@@ -280,6 +281,7 @@ export default function IssuesSearchClient({
           <div style={styles.searchInputRow}>
             <input
               type="text"
+              aria-label="Search issues"
               placeholder="Search issues by summary description or key (e.g. DTR-101)..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
@@ -295,6 +297,7 @@ export default function IssuesSearchClient({
           {/* Classification Dropdown Row */}
           <div style={styles.filtersDropdownRow}>
             <select
+              aria-label="Filter by project"
               value={selectedProject}
               onChange={(e) => {
                 setSelectedProject(e.target.value);
@@ -309,6 +312,7 @@ export default function IssuesSearchClient({
             </select>
 
             <select
+              aria-label="Filter by component"
               value={selectedComponent}
               onChange={(e) => setSelectedComponent(e.target.value)}
               style={styles.filterSelect}
@@ -321,6 +325,7 @@ export default function IssuesSearchClient({
             </select>
 
             <select
+              aria-label="Filter by status"
               value={selectedStatus}
               onChange={(e) => setSelectedStatus(e.target.value)}
               style={styles.filterSelect}
@@ -332,6 +337,7 @@ export default function IssuesSearchClient({
             </select>
 
             <select
+              aria-label="Filter by severity"
               value={selectedSeverity}
               onChange={(e) => setSelectedSeverity(e.target.value)}
               style={styles.filterSelect}
@@ -343,6 +349,7 @@ export default function IssuesSearchClient({
             </select>
 
             <select
+              aria-label="Filter by priority"
               value={selectedPriority}
               onChange={(e) => setSelectedPriority(e.target.value)}
               style={styles.filterSelect}
@@ -354,6 +361,7 @@ export default function IssuesSearchClient({
             </select>
 
             <select
+              aria-label="Filter by assignee"
               value={selectedAssignee}
               onChange={(e) => setSelectedAssignee(e.target.value)}
               style={styles.filterSelect}
@@ -499,7 +507,7 @@ const styles = {
     border: '1px solid rgba(255,255,255,0.1)',
     color: '#ffffff',
     fontSize: '0.8rem',
-    outline: 'none',
+    
   },
   saveFilterFormActions: {
     display: 'flex',
@@ -601,7 +609,7 @@ const styles = {
     border: '1px solid rgba(255, 255, 255, 0.08)',
     color: '#ffffff',
     fontSize: '0.9rem',
-    outline: 'none',
+    
   },
   resetFiltersBtn: {
     padding: '0.6rem 1rem',
@@ -625,7 +633,7 @@ const styles = {
     border: '1px solid rgba(255, 255, 255, 0.06)',
     color: '#d1d5db',
     fontSize: '0.8rem',
-    outline: 'none',
+    
   },
   resultsSummary: {
     fontSize: '0.8rem',

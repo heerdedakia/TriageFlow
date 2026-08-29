@@ -246,7 +246,7 @@ export default function GuidedReportClient({ projects, initialProjectId, createI
 
       {/* Main Form Box */}
       <div style={styles.formCard} className="glass-panel">
-        {error && <div style={styles.errorBox}>{error}</div>}
+        {error && <div style={styles.errorBox} aria-live="assertive" role="alert">{error}</div>}
 
         {/* STEP 1: PROBLEM */}
         {activeStep === 1 && (
@@ -255,8 +255,9 @@ export default function GuidedReportClient({ projects, initialProjectId, createI
             <p style={styles.stepDesc}>Briefly summarize what is wrong, specify the URL if applicable, and write details about the bug.</p>
 
             <div style={styles.fieldGroup}>
-              <label style={styles.label}>Summary / Issue Title *</label>
+              <label style={styles.label} htmlFor="issue-title">Summary / Issue Title *</label>
               <input
+                id="issue-title"
                 type="text"
                 required
                 placeholder="e.g. Shopping cart reset after checkout"
@@ -267,8 +268,9 @@ export default function GuidedReportClient({ projects, initialProjectId, createI
             </div>
 
             <div style={styles.fieldGroup}>
-              <label style={styles.label}>URL where the issue occurred (optional)</label>
+              <label style={styles.label} htmlFor="issue-url">URL where the issue occurred (optional)</label>
               <input
+                id="issue-url"
                 type="text"
                 placeholder="e.g. https://example.com/checkout"
                 value={urlOccurred}
@@ -278,8 +280,9 @@ export default function GuidedReportClient({ projects, initialProjectId, createI
             </div>
 
             <div style={styles.fieldGroup}>
-              <label style={styles.label}>Full Description *</label>
+              <label style={styles.label} htmlFor="issue-desc">Full Description *</label>
               <textarea
+                id="issue-desc"
                 rows={5}
                 required
                 placeholder="Explain what went wrong in detail..."
@@ -298,8 +301,9 @@ export default function GuidedReportClient({ projects, initialProjectId, createI
             <p style={styles.stepDesc}>Outline the actions you took and what happened.</p>
 
             <div style={styles.fieldGroup}>
-              <label style={styles.label}>Steps to Reproduce</label>
+              <label style={styles.label} htmlFor="issue-steps">Steps to Reproduce</label>
               <textarea
+                id="issue-steps"
                 rows={4}
                 placeholder="1. Click checkout&#10;2. Fill details&#10;3. Refresh the page..."
                 value={stepsToReproduce}
@@ -310,8 +314,9 @@ export default function GuidedReportClient({ projects, initialProjectId, createI
 
             <div style={styles.gridFields}>
               <div style={styles.fieldGroup}>
-                <label style={styles.label}>Expected Behavior</label>
+                <label style={styles.label} htmlFor="issue-expected">Expected Behavior</label>
                 <textarea
+                  id="issue-expected"
                   rows={3}
                   placeholder="What should have happened..."
                   value={expectedBehavior}
@@ -321,8 +326,9 @@ export default function GuidedReportClient({ projects, initialProjectId, createI
               </div>
 
               <div style={styles.fieldGroup}>
-                <label style={styles.label}>Actual Behavior</label>
+                <label style={styles.label} htmlFor="issue-actual">Actual Behavior</label>
                 <textarea
+                  id="issue-actual"
                   rows={3}
                   placeholder="What went wrong instead..."
                   value={actualBehavior}
@@ -342,8 +348,9 @@ export default function GuidedReportClient({ projects, initialProjectId, createI
 
             <div style={styles.gridFields}>
               <div style={styles.fieldGroup}>
-                <label style={styles.label}>Operating System (OS)</label>
+                <label style={styles.label} htmlFor="issue-os">Operating System (OS)</label>
                 <input
+                  id="issue-os"
                   type="text"
                   placeholder="e.g. Windows 11, macOS"
                   value={os}
@@ -353,8 +360,9 @@ export default function GuidedReportClient({ projects, initialProjectId, createI
               </div>
 
               <div style={styles.fieldGroup}>
-                <label style={styles.label}>Browser / Device Version</label>
+                <label style={styles.label} htmlFor="issue-browser">Browser / Device Version</label>
                 <input
+                  id="issue-browser"
                   type="text"
                   placeholder="e.g. Chrome, Safari"
                   value={browser}
@@ -384,9 +392,10 @@ export default function GuidedReportClient({ projects, initialProjectId, createI
             >
               <div style={styles.dropzoneContent}>
                 <span style={styles.uploadIcon}>📁</span>
-                <p style={styles.uploadTitle}>Drag & drop evidence file here, or click to upload</p>
+                <label style={styles.uploadTitle} htmlFor="issue-file">Drag & drop evidence file here, or click to upload</label>
                 <p style={styles.uploadLimit}>Max size: 4MB (images, logs, text)</p>
                 <input
+                  id="issue-file"
                   type="file"
                   onChange={handleFileChange}
                   style={styles.fileInput}
@@ -633,7 +642,7 @@ const styles = {
     border: '1px solid rgba(255, 255, 255, 0.08)',
     color: '#ffffff',
     fontSize: '0.95rem',
-    outline: 'none',
+    
   },
   textarea: {
     padding: '0.75rem 1rem',
@@ -642,7 +651,7 @@ const styles = {
     border: '1px solid rgba(255, 255, 255, 0.08)',
     color: '#ffffff',
     fontSize: '0.95rem',
-    outline: 'none',
+    
     resize: 'vertical' as const,
   },
   select: {
@@ -652,7 +661,7 @@ const styles = {
     border: '1px solid rgba(255, 255, 255, 0.08)',
     color: '#ffffff',
     fontSize: '0.95rem',
-    outline: 'none',
+    
   },
   dropzone: {
     border: '2px dashed rgba(255,255,255,0.08)',

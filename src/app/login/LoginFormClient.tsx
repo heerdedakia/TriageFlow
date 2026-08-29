@@ -37,7 +37,7 @@ export default function LoginFormClient({ loginAction }: LoginFormClientProps) {
   return (
     <div style={{ width: '100%' }}>
       <form onSubmit={handleSubmit} style={styles.form}>
-        {error && <div style={styles.errorAlert}>{error}</div>}
+        {error && <div style={styles.errorAlert} aria-live="assertive" role="alert">{error}</div>}
 
         <div style={styles.fieldGroup}>
           <label htmlFor="email-input" style={styles.label}>Email Address</label>
@@ -157,7 +157,7 @@ const styles = {
     border: '1px solid rgba(255, 255, 255, 0.08)',
     color: '#ffffff',
     fontSize: '0.95rem',
-    outline: 'none',
+    
     transition: 'border-color 0.2s ease',
   },
   submitBtn: {
