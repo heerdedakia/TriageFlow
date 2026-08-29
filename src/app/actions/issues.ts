@@ -36,9 +36,9 @@ export async function createIssue(data: any) {
   }
 
   try {
-    // Dynamic find or create project by name
-    let project = await db.project.findUnique({
-      where: { name: result.data.projectName },
+    // Dynamic find or create project by name (case-insensitive to prevent duplicate/typo'd projects)
+    let project = await db.project.findFirst({
+      where: { name: { equals: result.data.projectName, mode: 'insensitive' } },
       include: { _count: { select: { issues: true } } },
     });
 
@@ -59,9 +59,15 @@ export async function createIssue(data: any) {
       }
 
       // Query for an administrative account to be the project lead if user is not PM/Admin
+      // Regression/Fix: Added orderBy createdAt: 'asc' for deterministic ordering. 
+      // Relying on nondeterministic default ordering can cause race conditions or flaky tests
+      // as the 'first' admin may vary across DB reads.
       const leadId = (session.role === Role.ADMIN || session.role === Role.PROJECT_MANAGER)
         ? session.id
-        : (await db.user.findFirst({ where: { role: Role.ADMIN } }))?.id || session.id;
+        : (await db.user.findFirst({ 
+            where: { role: Role.ADMIN },
+            orderBy: { createdAt: 'asc' }
+          }))?.id || session.id;
 
       project = await db.project.create({
         data: {
@@ -75,68 +81,95 @@ export async function createIssue(data: any) {
     }
 
     // Generate unique key like DTR-101 based on issues count
-    const issueCount = project._count.issues;
-    const issueKey = `${project.key}-${101 + issueCount}`;
+    // Regression/Fix: To avoid race conditions on `Issue.key` unique constraint when multiple users 
+    // create issues concurrently in the same project, we wrap the transaction in a retry loop.
+    const MAX_RETRIES = 5;
+    let newIssue = null;
+    let attempt = 0;
 
-    const newIssue = await db.$transaction(async (tx) => {
-      // 1. Create Issue
-      const issue = await tx.issue.create({
-        data: {
-          key: issueKey,
-          title: result.data.title,
-          description: result.data.description,
-          stepsToReproduce: result.data.stepsToReproduce,
-          expectedBehavior: result.data.expectedBehavior,
-          actualBehavior: result.data.actualBehavior,
-          environment: result.data.environment,
-          severity: result.data.severity,
-          priority: result.data.priority,
-          status: IssueStatus.NEW,
-          projectId: project.id,
-          urlOccurred: result.data.urlOccurred || null,
-          reporterId: session.id,
-        },
-      });
-
-      // 2. Create Attachment if uploaded
-      if (result.data.attachmentUrl && result.data.attachmentName) {
-        await tx.attachment.create({
-          data: {
-            issueId: issue.id,
-            name: result.data.attachmentName,
-            url: result.data.attachmentUrl,
-            mimeType: result.data.attachmentMimeType || 'application/octet-stream',
-            size: result.data.attachmentSize || 0,
-            uploadedById: session.id,
-          },
+    while (attempt < MAX_RETRIES) {
+      try {
+        // Fetch fresh count per attempt
+        const currentProject = await db.project.findUnique({
+          where: { id: project.id },
+          include: { _count: { select: { issues: true } } },
         });
-      }
+        const issueCount = currentProject?._count.issues || 0;
+        const issueKey = `${project.key}-${101 + issueCount + attempt}`;
 
-      // 3. Log Activity
-      await tx.activity.create({
-        data: {
-          issueId: issue.id,
-          actorId: session.id,
-          action: 'CREATE',
-          details: JSON.stringify({ summary: result.data.title }),
-        },
-      });
+        newIssue = await db.$transaction(async (tx) => {
+          // 1. Create Issue
+          const issue = await tx.issue.create({
+            data: {
+              key: issueKey,
+              title: result.data.title,
+              description: result.data.description,
+              stepsToReproduce: result.data.stepsToReproduce,
+              expectedBehavior: result.data.expectedBehavior,
+              actualBehavior: result.data.actualBehavior,
+              environment: result.data.environment,
+              severity: result.data.severity,
+              priority: result.data.priority,
+              status: IssueStatus.NEW,
+              projectId: project.id,
+              urlOccurred: result.data.urlOccurred || null,
+              reporterId: session.id,
+            },
+          });
 
-      // 4. Create Notifications for Project Lead and Admins
-      const leadId = project.leadId;
-      if (leadId && leadId !== session.id) {
-        await tx.notification.create({
-          data: {
-            userId: leadId,
-            title: 'New Bug Reported',
-            content: `New issue reported in ${project.key}: "${result.data.title}" (${issueKey})`,
-            link: `/issues/${issueKey}`,
-          },
+          // 2. Create Attachment if uploaded
+          if (result.data.attachmentUrl && result.data.attachmentName) {
+            await tx.attachment.create({
+              data: {
+                issueId: issue.id,
+                name: result.data.attachmentName,
+                url: result.data.attachmentUrl,
+                mimeType: result.data.attachmentMimeType || 'application/octet-stream',
+                size: result.data.attachmentSize || 0,
+                uploadedById: session.id,
+              },
+            });
+          }
+
+          // 3. Log Activity
+          await tx.activity.create({
+            data: {
+              issueId: issue.id,
+              actorId: session.id,
+              action: 'CREATE',
+              details: JSON.stringify({ summary: result.data.title }),
+            },
+          });
+
+          // 4. Create Notifications for Project Lead and Admins
+          const leadId = project.leadId;
+          if (leadId && leadId !== session.id) {
+            await tx.notification.create({
+              data: {
+                userId: leadId,
+                title: 'New Bug Reported',
+                content: `New issue reported in ${project.key}: "${result.data.title}" (${issueKey})`,
+                link: `/issues/${issueKey}`,
+              },
+            });
+          }
+
+          return issue;
         });
-      }
 
-      return issue;
-    });
+        break; // Success!
+      } catch (error: any) {
+        if (error.code === 'P2002' && attempt < MAX_RETRIES - 1) {
+          attempt++;
+          continue; // Retry on unique constraint violation
+        }
+        throw error; // Rethrow if it's not a unique constraint error or we're out of retries
+      }
+    }
+
+    if (!newIssue) {
+      throw new Error("Exceeded maximum retries for issue key generation.");
+    }
 
     revalidatePath('/issues');
     revalidatePath('/dashboard');
