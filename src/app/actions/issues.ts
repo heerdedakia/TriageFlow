@@ -256,11 +256,11 @@ export async function assignIssue(issueId: string, assigneeId: string | null) {
   }
 }
 
-type TransitionCtx = { sessionRole: Role; assigneeId: string | null; reporterId: string; sessionId: string };
+export type TransitionCtx = { sessionRole: Role; assigneeId: string | null; reporterId: string; sessionId: string };
 
 const checkRole = (role: Role, allowed: Role[]) => allowed.includes(role);
 
-const TRANSITIONS: Record<IssueStatus, Partial<Record<IssueStatus, (ctx: TransitionCtx) => boolean>>> = {
+export const TRANSITIONS: Record<IssueStatus, Partial<Record<IssueStatus, (ctx: TransitionCtx) => boolean>>> = {
   NEW: {
     TRIAGED: (ctx) => checkRole(ctx.sessionRole, [Role.ADMIN, Role.PROJECT_MANAGER, Role.QA]),
     ASSIGNED: (ctx) => checkRole(ctx.sessionRole, [Role.ADMIN, Role.PROJECT_MANAGER, Role.QA]),
