@@ -6,7 +6,7 @@ export async function middleware(request: NextRequest) {
   const sessionToken = request.cookies.get('session')?.value;
   const path = request.nextUrl.pathname;
 
-  const isPublicRoute = path === '/login' || path === '/register';
+  const isPublicRoute = path === '/login' || path === '/register' || path.startsWith('/status/');
 
   if (!sessionToken && !isPublicRoute) {
     return NextResponse.redirect(new URL('/login', request.url));

@@ -411,7 +411,17 @@ export default function WorkspaceClient({
         <div style={styles.leftCol}>
           {/* Issue summary description card */}
           <div style={styles.detailsCard} className="glass-panel">
-            <h2 style={styles.titleText}>{issue.title}</h2>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+              <h2 style={styles.titleText}>{issue.title}</h2>
+              <a 
+                href={`/status/${issue.key}`} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                style={{ ...styles.transitionBtnSec, textDecoration: 'none', display: 'inline-block' } as React.CSSProperties}
+              >
+                🔗 Public Status Link
+              </a>
+            </div>
             
             <div style={styles.metaRow}>
               <span style={styles.metaItem}>Reported by: <strong>{issue.reporter.name}</strong></span>
