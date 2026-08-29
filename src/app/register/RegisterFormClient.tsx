@@ -57,7 +57,7 @@ export default function RegisterFormClient({ registerAction }: RegisterFormClien
           name="email"
           type="email"
           required
-          placeholder="e.g. reporter@bugzilla.dev"
+          placeholder="e.g. reporter@triageflow.dev"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           style={styles.input}

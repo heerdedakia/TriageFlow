@@ -443,7 +443,7 @@ export default function GuidedReportClient({ projects, initialProjectId, createI
               <input
                 type="text"
                 required
-                placeholder="Type the project or product name (e.g. Bugzilla Reconstruction)"
+                placeholder="Type the project or product name (e.g. TriageFlow)"
                 value={projectName}
                 onChange={(e) => setProjectName(e.target.value)}
                 style={styles.input}

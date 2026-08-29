@@ -1,7 +1,7 @@
 import { SignJWT, jwtVerify } from 'jose';
 import { Role } from '@prisma/client';
 
-const SECRET_KEY = process.env.AUTH_SECRET || 'a_highly_secure_and_random_32_character_secret_key_for_bugzilla';
+const SECRET_KEY = process.env.AUTH_SECRET || 'a_highly_secure_and_random_32_character_secret_key_for_triageflow';
 const key = new TextEncoder().encode(SECRET_KEY);
 
 export interface SessionUser {

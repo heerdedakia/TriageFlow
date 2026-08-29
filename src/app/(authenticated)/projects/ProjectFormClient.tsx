@@ -52,7 +52,7 @@ export default function ProjectFormClient({ createProjectAction }: ProjectFormCl
           id="proj-name"
           type="text"
           required
-          placeholder="e.g. Bugzilla Reconstruction"
+          placeholder="e.g. TriageFlow"
           value={name}
           onChange={(e) => setName(e.target.value)}
           style={styles.input}

@@ -8,8 +8,8 @@ export default async function RegisterPage() {
     <div className={styles.container}>
       <div className={styles.card}>
         <div className={styles.logo}>
-          <span className={styles.logoBug}>Bugzilla</span>
-          <span className={styles.logoDtr}>DTR</span>
+          <span className={styles.logoBug}>Triage</span>
+          <span className={styles.logoDtr}>Flow</span>
         </div>
         <h1 className={styles.title}>Create your account</h1>
         <p className={styles.subtitle}>Get started with your custom issue tracking workspace</p>

@@ -8,8 +8,8 @@ export default async function LoginPage() {
     <div className={styles.container}>
       <div className={styles.card}>
         <div className={styles.logo}>
-          <span className={styles.logoBug}>Bugzilla</span>
-          <span className={styles.logoDtr}>DTR</span>
+          <span className={styles.logoBug}>Triage</span>
+          <span className={styles.logoDtr}>Flow</span>
         </div>
         <h1 className={styles.title}>Sign in to your workspace</h1>
         <p className={styles.subtitle}>Enter your credentials or click a demo account below</p>

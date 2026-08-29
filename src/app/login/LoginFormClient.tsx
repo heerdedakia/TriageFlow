@@ -46,7 +46,7 @@ export default function LoginFormClient({ loginAction }: LoginFormClientProps) {
             name="email"
             type="email"
             required
-            placeholder="e.g. developer@bugzilla.dev"
+            placeholder="e.g. developer@triageflow.dev"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             style={styles.input}
@@ -89,44 +89,44 @@ export default function LoginFormClient({ loginAction }: LoginFormClientProps) {
       <div style={styles.demoButtonsGrid}>
         <button
           type="button"
-          onClick={() => handleFillDemo('admin@bugzilla.dev')}
+          onClick={() => handleFillDemo('admin@triageflow.dev')}
           style={styles.demoBtn}
         >
           <span style={styles.demoBtnLabel}>Admin</span>
-          <span style={styles.demoBtnEmail}>admin@bugzilla.dev</span>
+          <span style={styles.demoBtnEmail}>admin@triageflow.dev</span>
         </button>
         <button
           type="button"
-          onClick={() => handleFillDemo('pm@bugzilla.dev')}
+          onClick={() => handleFillDemo('pm@triageflow.dev')}
           style={styles.demoBtn}
         >
           <span style={styles.demoBtnLabel}>PM (Manager)</span>
-          <span style={styles.demoBtnEmail}>pm@bugzilla.dev</span>
+          <span style={styles.demoBtnEmail}>pm@triageflow.dev</span>
         </button>
         <button
           type="button"
-          onClick={() => handleFillDemo('qa@bugzilla.dev')}
+          onClick={() => handleFillDemo('qa@triageflow.dev')}
           style={styles.demoBtn}
         >
           <span style={styles.demoBtnLabel}>QA / Tester</span>
-          <span style={styles.demoBtnEmail}>qa@bugzilla.dev</span>
+          <span style={styles.demoBtnEmail}>qa@triageflow.dev</span>
         </button>
         <button
           type="button"
-          onClick={() => handleFillDemo('developer@bugzilla.dev')}
+          onClick={() => handleFillDemo('developer@triageflow.dev')}
           style={styles.demoBtn}
         >
           <span style={styles.demoBtnLabel}>Developer</span>
-          <span style={styles.demoBtnEmail}>developer@bugzilla.dev</span>
+          <span style={styles.demoBtnEmail}>developer@triageflow.dev</span>
         </button>
         <button
           type="button"
-          onClick={() => handleFillDemo('reporter@bugzilla.dev')}
+          onClick={() => handleFillDemo('reporter@triageflow.dev')}
           style={styles.demoBtn}
           // Span 2 columns on mobile if necessary
         >
           <span style={styles.demoBtnLabel}>Reporter</span>
-          <span style={styles.demoBtnEmail}>reporter@bugzilla.dev</span>
+          <span style={styles.demoBtnEmail}>reporter@triageflow.dev</span>
         </button>
       </div>
     </div>
