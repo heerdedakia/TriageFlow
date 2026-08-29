@@ -256,6 +256,46 @@ export async function assignIssue(issueId: string, assigneeId: string | null) {
   }
 }
 
+type TransitionCtx = { sessionRole: Role; assigneeId: string | null; reporterId: string; sessionId: string };
+
+const checkRole = (role: Role, allowed: Role[]) => allowed.includes(role);
+
+const TRANSITIONS: Record<IssueStatus, Partial<Record<IssueStatus, (ctx: TransitionCtx) => boolean>>> = {
+  NEW: {
+    TRIAGED: (ctx) => checkRole(ctx.sessionRole, [Role.ADMIN, Role.PROJECT_MANAGER, Role.QA]),
+    ASSIGNED: (ctx) => checkRole(ctx.sessionRole, [Role.ADMIN, Role.PROJECT_MANAGER, Role.QA]),
+    CLOSED: (ctx) => checkRole(ctx.sessionRole, [Role.ADMIN, Role.PROJECT_MANAGER]), // reject/won't-fix path
+  },
+  TRIAGED: {
+    ASSIGNED: (ctx) => checkRole(ctx.sessionRole, [Role.ADMIN, Role.PROJECT_MANAGER, Role.QA]),
+    NEW: (ctx) => checkRole(ctx.sessionRole, [Role.ADMIN, Role.PROJECT_MANAGER, Role.QA]),
+    CLOSED: (ctx) => checkRole(ctx.sessionRole, [Role.ADMIN, Role.PROJECT_MANAGER]),
+  },
+  ASSIGNED: {
+    TRIAGED: (ctx) => checkRole(ctx.sessionRole, [Role.ADMIN, Role.PROJECT_MANAGER, Role.QA]),
+    IN_PROGRESS: (ctx) => ctx.assigneeId === ctx.sessionId || checkRole(ctx.sessionRole, [Role.ADMIN, Role.PROJECT_MANAGER]),
+  },
+  IN_PROGRESS: {
+    ASSIGNED: (ctx) => ctx.assigneeId === ctx.sessionId || checkRole(ctx.sessionRole, [Role.ADMIN, Role.PROJECT_MANAGER]),
+    RESOLVED: (ctx) => ctx.assigneeId === ctx.sessionId || checkRole(ctx.sessionRole, [Role.ADMIN, Role.PROJECT_MANAGER]),
+    VERIFICATION: (ctx) => ctx.assigneeId === ctx.sessionId || checkRole(ctx.sessionRole, [Role.ADMIN, Role.PROJECT_MANAGER]),
+  },
+  RESOLVED: {
+    VERIFICATION: (ctx) => ctx.assigneeId === ctx.sessionId || checkRole(ctx.sessionRole, [Role.ADMIN, Role.PROJECT_MANAGER]),
+    IN_PROGRESS: (ctx) => checkRole(ctx.sessionRole, [Role.QA, Role.ADMIN, Role.PROJECT_MANAGER]) || ctx.reporterId === ctx.sessionId,
+    NEW: (ctx) => checkRole(ctx.sessionRole, [Role.QA, Role.ADMIN, Role.PROJECT_MANAGER]) || ctx.reporterId === ctx.sessionId,
+  },
+  VERIFICATION: {
+    CLOSED: (ctx) => checkRole(ctx.sessionRole, [Role.QA, Role.ADMIN, Role.PROJECT_MANAGER]) || ctx.reporterId === ctx.sessionId,
+    IN_PROGRESS: (ctx) => checkRole(ctx.sessionRole, [Role.QA, Role.ADMIN, Role.PROJECT_MANAGER]) || ctx.reporterId === ctx.sessionId,
+    NEW: (ctx) => checkRole(ctx.sessionRole, [Role.QA, Role.ADMIN, Role.PROJECT_MANAGER]) || ctx.reporterId === ctx.sessionId,
+  },
+  CLOSED: {
+    IN_PROGRESS: (ctx) => checkRole(ctx.sessionRole, [Role.QA, Role.ADMIN, Role.PROJECT_MANAGER]) || ctx.reporterId === ctx.sessionId,
+    NEW: (ctx) => checkRole(ctx.sessionRole, [Role.QA, Role.ADMIN, Role.PROJECT_MANAGER]) || ctx.reporterId === ctx.sessionId,
+  },
+};
+
 export async function transitionIssueStatus(issueId: string, newStatus: IssueStatus) {
   const session = await getSession();
   if (!session) {
@@ -273,55 +313,23 @@ export async function transitionIssueStatus(issueId: string, newStatus: IssueSta
     }
 
     const currentStatus = issue.status;
+
+    // Check transitions using declarative table
+    const transitionRule = TRANSITIONS[currentStatus]?.[newStatus];
     
-    // Check transitions and roles
-    let allowed = false;
-
-    // 1. Triage: NEW -> TRIAGED / ASSIGNED
-    if (currentStatus === IssueStatus.NEW && (newStatus === IssueStatus.TRIAGED || newStatus === IssueStatus.ASSIGNED)) {
-      allowed = session.role === Role.ADMIN || session.role === Role.PROJECT_MANAGER || session.role === Role.QA;
-    }
-    // 2. Assign: TRIAGED -> ASSIGNED
-    else if (currentStatus === IssueStatus.TRIAGED && newStatus === IssueStatus.ASSIGNED) {
-      allowed = session.role === Role.ADMIN || session.role === Role.PROJECT_MANAGER || session.role === Role.QA;
-    }
-    // 3. Untriage/Unassign
-    else if (currentStatus === IssueStatus.TRIAGED && newStatus === IssueStatus.NEW) {
-      allowed = session.role === Role.ADMIN || session.role === Role.PROJECT_MANAGER || session.role === Role.QA;
-    }
-    else if (currentStatus === IssueStatus.ASSIGNED && newStatus === IssueStatus.TRIAGED) {
-      allowed = session.role === Role.ADMIN || session.role === Role.PROJECT_MANAGER || session.role === Role.QA;
-    }
-    // 4. Start work: ASSIGNED -> IN_PROGRESS
-    else if (currentStatus === IssueStatus.ASSIGNED && newStatus === IssueStatus.IN_PROGRESS) {
-      allowed = issue.assigneeId === session.id || session.role === Role.ADMIN || session.role === Role.PROJECT_MANAGER;
-    }
-    // 5. Stop work: IN_PROGRESS -> ASSIGNED
-    else if (currentStatus === IssueStatus.IN_PROGRESS && newStatus === IssueStatus.ASSIGNED) {
-      allowed = issue.assigneeId === session.id || session.role === Role.ADMIN || session.role === Role.PROJECT_MANAGER;
-    }
-    // 6. Resolve: IN_PROGRESS -> RESOLVED / VERIFICATION
-    else if (currentStatus === IssueStatus.IN_PROGRESS && (newStatus === IssueStatus.RESOLVED || newStatus === IssueStatus.VERIFICATION)) {
-      allowed = issue.assigneeId === session.id || session.role === Role.ADMIN || session.role === Role.PROJECT_MANAGER;
-    }
-    // 7. verification: RESOLVED -> VERIFICATION
-    else if (currentStatus === IssueStatus.RESOLVED && newStatus === IssueStatus.VERIFICATION) {
-      allowed = issue.assigneeId === session.id || session.role === Role.ADMIN || session.role === Role.PROJECT_MANAGER;
-    }
-    // 8. Close: VERIFICATION -> CLOSED
-    else if (currentStatus === IssueStatus.VERIFICATION && newStatus === IssueStatus.CLOSED) {
-      allowed = session.role === Role.QA || session.role === Role.ADMIN || session.role === Role.PROJECT_MANAGER || issue.reporterId === session.id;
-    }
-    // 9. Reopen: ANY STATE -> IN_PROGRESS / NEW / TRIAGED
-    else if (
-      (currentStatus === IssueStatus.CLOSED || currentStatus === IssueStatus.VERIFICATION || currentStatus === IssueStatus.RESOLVED) &&
-      (newStatus === IssueStatus.IN_PROGRESS || newStatus === IssueStatus.NEW)
-    ) {
-      allowed = session.role === Role.QA || session.role === Role.ADMIN || session.role === Role.PROJECT_MANAGER || issue.reporterId === session.id;
+    if (!transitionRule) {
+      return { error: `Invalid transition: Cannot move issue from ${currentStatus} to ${newStatus}.` };
     }
 
-    if (!allowed) {
-      return { error: `Access Denied: Your role (${session.role}) is not authorized to transition this issue from ${currentStatus} to ${newStatus}.` };
+    const isAllowed = transitionRule({
+      sessionRole: session.role as Role,
+      assigneeId: issue.assigneeId,
+      reporterId: issue.reporterId,
+      sessionId: session.id,
+    });
+
+    if (!isAllowed) {
+      return { error: `Access Denied: Your role is not authorized to transition this issue from ${currentStatus} to ${newStatus}.` };
     }
 
     await db.$transaction(async (tx) => {
