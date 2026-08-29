@@ -47,7 +47,7 @@ npm install
 Copy `.env.example` to `.env` and replace `DATABASE_URL` with your PostgreSQL database connection string (e.g. from Neon or Supabase):
 ```bash
 # Example .env configuration
-DATABASE_URL="postgresql://username:password@ep-glowing-neon.aws.neon.tech/bugzilla_dtr?sslmode=require"
+DATABASE_URL="postgresql://username:password@ep-glowing-neon.aws.neon.tech/triageflow?sslmode=require"
 AUTH_SECRET="a-random-32-character-secret-key-for-jwt"
 ```
 
