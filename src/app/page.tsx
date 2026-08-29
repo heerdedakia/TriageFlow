@@ -22,8 +22,8 @@ export default async function LandingPage() {
     <div style={styles.container}>
       <header style={styles.header}>
         <div style={styles.logo}>
-          <span style={styles.logoBug}>Bugzilla</span>
-          <span style={styles.logoDtr}>DTR</span>
+          <span style={styles.logoBug}>Triage</span>
+          <span style={styles.logoDtr}>Flow</span>
         </div>
         <div style={styles.headerLinks}>
           <Link href="/login" style={styles.loginBtn}>Sign In</Link>
@@ -105,7 +105,7 @@ export default async function LandingPage() {
       </main>
 
       <footer style={styles.footer}>
-        <p>© 2026 Developer Tool Reconstruction: Bugzilla. Created for College Hackathon.</p>
+        <p>© 2026 Developer Tool Reconstruction: TriageFlow. Created for College Hackathon.</p>
       </footer>
     </div>
   );

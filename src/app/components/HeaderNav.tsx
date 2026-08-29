@@ -47,8 +47,8 @@ export default function HeaderNav({ user, notifications: initialNotifications }:
     <header style={styles.header}>
       <div style={styles.left}>
         <div style={styles.logo}>
-          <span style={styles.logoBug}>Bugzilla</span>
-          <span style={styles.logoDtr}>DTR</span>
+          <span style={styles.logoBug}>Triage</span>
+          <span style={styles.logoDtr}>Flow</span>
         </div>
       </div>
 

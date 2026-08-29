@@ -5,7 +5,7 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Bugzilla DTR | Developer Tool Reconstruction",
+  title: "TriageFlow | Developer Tool Reconstruction",
   description: "A highly polished, modern issue-tracking and workflow platform for high-velocity engineering teams.",
 };
 
