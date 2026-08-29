@@ -18,7 +18,9 @@ const registerSchema = z.object({
   role: z.nativeEnum(Role),
 });
 
-export async function loginUser(prevState: any, formData: FormData) {
+export type AuthState = { error?: string } | null | undefined;
+
+export async function loginUser(prevState: AuthState, formData: FormData) {
   const email = formData.get('email') as string;
   const password = formData.get('password') as string;
 
@@ -52,7 +54,7 @@ export async function loginUser(prevState: any, formData: FormData) {
   redirect('/dashboard');
 }
 
-export async function registerUser(prevState: any, formData: FormData) {
+export async function registerUser(prevState: AuthState, formData: FormData) {
   const name = formData.get('name') as string;
   const email = formData.get('email') as string;
   const password = formData.get('password') as string;

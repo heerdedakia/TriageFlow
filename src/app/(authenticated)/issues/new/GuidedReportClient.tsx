@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { Severity, Priority } from '@prisma/client';
+import { Severity, Priority, Project } from '@prisma/client';
+import type { CreateIssueData } from '@/app/actions/issues';
 
 interface ProjectWithComponents {
   id: string;
@@ -13,7 +14,7 @@ interface ProjectWithComponents {
 interface GuidedReportClientProps {
   projects: ProjectWithComponents[];
   initialProjectId: string;
-  createIssueAction: (data: any) => Promise<{ error?: string; success?: boolean; issueKey?: string }>;
+  createIssueAction: (data: CreateIssueData) => Promise<{ error?: string; success?: boolean; issueKey?: string }>;
 }
 
 const STEPS = [

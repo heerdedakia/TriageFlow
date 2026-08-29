@@ -18,7 +18,9 @@ const createComponentSchema = z.object({
   projectId: z.string().uuid(),
 });
 
-export async function createProject(prevState: any, formData: FormData) {
+export type ActionState = { error?: string; success?: boolean } | null | undefined;
+
+export async function createProject(prevState: ActionState, formData: FormData) {
   const session = await getSession();
   if (!session || (session.role !== Role.ADMIN && session.role !== Role.PROJECT_MANAGER)) {
     return { error: 'Access Denied: Only Admins or Project Managers can create projects.' };
@@ -64,7 +66,7 @@ export async function createProject(prevState: any, formData: FormData) {
   }
 }
 
-export async function createComponent(prevState: any, formData: FormData) {
+export async function createComponent(prevState: ActionState, formData: FormData) {
   const session = await getSession();
   if (!session || (session.role !== Role.ADMIN && session.role !== Role.PROJECT_MANAGER)) {
     return { error: 'Access Denied: Only Admins or Project Managers can create components.' };

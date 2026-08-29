@@ -24,7 +24,9 @@ const createIssueSchema = z.object({
   attachmentSize: z.number().optional(),
 });
 
-export async function createIssue(data: any) {
+export type CreateIssueData = z.infer<typeof createIssueSchema>;
+
+export async function createIssue(data: CreateIssueData) {
   const session = await getSession();
   if (!session) {
     return { error: 'Unauthorized' };

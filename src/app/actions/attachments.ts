@@ -13,7 +13,9 @@ const uploadAttachmentSchema = z.object({
   size: z.number().max(4 * 1024 * 1024, 'File exceeds 4MB size limit'),
 });
 
-export async function addAttachment(data: any) {
+export type AddAttachmentData = z.infer<typeof uploadAttachmentSchema>;
+
+export async function addAttachment(data: AddAttachmentData) {
   const session = await getSession();
   if (!session) {
     return { error: 'Unauthorized' };
