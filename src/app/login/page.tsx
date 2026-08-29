@@ -4,8 +4,8 @@ import LoginFormClient from './LoginFormClient';
 
 export default async function LoginPage() {
   return (
-    <div style={styles.container}>
-      <div style={styles.card}>
+    <div className={styles.container}>
+      <div className={styles.card}>
         <div style={styles.logo}>
           <span style={styles.logoBug}>Bugzilla</span>
           <span style={styles.logoDtr}>DTR</span>
@@ -23,7 +23,8 @@ export default async function LoginPage() {
   );
 }
 
-const styles = {
+import styles from '@/styles/theme.module.css';
+/* Styles are now defined in the CSS module */
   container: {
     minHeight: '100vh',
     display: 'flex',
