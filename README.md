@@ -1,6 +1,6 @@
-# Bugzilla DTR — Developer Tool Reconstruction
+# TriageFlow — Developer Tool Reconstruction
 
-Bugzilla DTR is a modern, high-fidelity, and secure issue-tracking platform built from scratch for the "Developer Tool Reconstruction" college hackathon. This is not a Bugzilla clone; instead, it is a redesigned issue workflow resolver built for modern engineering teams.
+TriageFlow is a modern, high-fidelity, and secure issue-tracking platform built from scratch for the "Developer Tool Reconstruction" college hackathon. This is not a Bugzilla clone; instead, it is a redesigned issue workflow resolver built for modern engineering teams.
 
 ## Tech Stack
 * **Framework**: Next.js 14 (App Router) with TypeScript
@@ -28,11 +28,11 @@ Log in with any of these pre-seeded demo accounts to experience role-specific me
 
 | Workspace Role | Email Address | Password |
 | :--- | :--- | :--- |
-| **Admin** | `admin@bugzilla.dev` | `Password123` |
-| **Project Manager** | `pm@bugzilla.dev` | `Password123` |
-| **QA / Tester** | `qa@bugzilla.dev` | `Password123` |
-| **Developer** | `developer@bugzilla.dev` | `Password123` |
-| **Reporter** | `reporter@bugzilla.dev` | `Password123` |
+| **Admin** | `admin@triageflow.dev` | `Password123` |
+| **Project Manager** | `pm@triageflow.dev` | `Password123` |
+| **QA / Tester** | `qa@triageflow.dev` | `Password123` |
+| **Developer** | `developer@triageflow.dev` | `Password123` |
+| **Reporter** | `reporter@triageflow.dev` | `Password123` |
 
 ---
 
@@ -128,7 +128,7 @@ stateDiagram-v2
 
 ## SLA Timer System
 
-Bugzilla-DTR features a server-side enforceable, dynamic SLA (Service Level Agreement) timer system that automatically computes triage deadlines based on issue severity and tracks adherence.
+TriageFlow features a server-side enforceable, dynamic SLA (Service Level Agreement) timer system that automatically computes triage deadlines based on issue severity and tracks adherence.
 
 | Severity | Resolution SLA Window | Description / Impact |
 | :--- | :--- | :--- |

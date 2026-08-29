@@ -11,11 +11,11 @@ export default async function LandingPage() {
   }
 
   const credentials = [
-    { role: 'Admin', email: 'admin@bugzilla.dev', pass: 'Password123' },
-    { role: 'Project Manager', email: 'pm@bugzilla.dev', pass: 'Password123' },
-    { role: 'QA / Tester', email: 'qa@bugzilla.dev', pass: 'Password123' },
-    { role: 'Developer', email: 'developer@bugzilla.dev', pass: 'Password123' },
-    { role: 'Reporter', email: 'reporter@bugzilla.dev', pass: 'Password123' },
+    { role: 'Admin', email: 'admin@triageflow.dev', pass: 'Password123' },
+    { role: 'Project Manager', email: 'pm@triageflow.dev', pass: 'Password123' },
+    { role: 'QA / Tester', email: 'qa@triageflow.dev', pass: 'Password123' },
+    { role: 'Developer', email: 'developer@triageflow.dev', pass: 'Password123' },
+    { role: 'Reporter', email: 'reporter@triageflow.dev', pass: 'Password123' },
   ];
 
   return (

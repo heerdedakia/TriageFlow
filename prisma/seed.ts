@@ -22,7 +22,7 @@ async function main() {
 
   const admin = await prisma.user.create({
     data: {
-      email: 'admin@bugzilla.dev',
+      email: 'admin@triageflow.dev',
       passwordHash,
       name: 'Alice Admin',
       role: Role.ADMIN,
@@ -31,7 +31,7 @@ async function main() {
 
   const pm = await prisma.user.create({
     data: {
-      email: 'pm@bugzilla.dev',
+      email: 'pm@triageflow.dev',
       passwordHash,
       name: 'Peter Manager',
       role: Role.PROJECT_MANAGER,
@@ -40,7 +40,7 @@ async function main() {
 
   const qa = await prisma.user.create({
     data: {
-      email: 'qa@bugzilla.dev',
+      email: 'qa@triageflow.dev',
       passwordHash,
       name: 'Quincy Tester',
       role: Role.QA,
@@ -49,7 +49,7 @@ async function main() {
 
   const developer = await prisma.user.create({
     data: {
-      email: 'developer@bugzilla.dev',
+      email: 'developer@triageflow.dev',
       passwordHash,
       name: 'Devin Coder',
       role: Role.DEVELOPER,
@@ -58,7 +58,7 @@ async function main() {
 
   const reporter = await prisma.user.create({
     data: {
-      email: 'reporter@bugzilla.dev',
+      email: 'reporter@triageflow.dev',
       passwordHash,
       name: 'Rachel Reporter',
       role: Role.REPORTER,
