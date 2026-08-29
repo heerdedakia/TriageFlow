@@ -121,5 +121,64 @@ stateDiagram-v2
 ## Known Limitations
 
 - **Email Notifications**: Currently mocked. Real email integrations (e.g. Resend or SendGrid) are not implemented yet.
-- **WebSocket/Real-time Updates**: Real-time pushes via WebSockets are absent; Next.js server actions mutate data and call `revalidatePath`.
+- **WebSocket/Real-time Updates**: Real-time polling was considered but bypassed in favor of robust, server-side enforceable SLA timers and badges computed dynamically on load, eliminating WebSocket race conditions and client spoofing.
 - **Advanced Rich Text**: Comments support markdown visually but an advanced WYSIWYG editor is missing.
+
+---
+
+## SLA Timer System
+
+Bugzilla-DTR features a server-side enforceable, dynamic SLA (Service Level Agreement) timer system that automatically computes triage deadlines based on issue severity and tracks adherence.
+
+| Severity | Resolution SLA Window | Description / Impact |
+| :--- | :--- | :--- |
+| **CRITICAL** | 4 Hours | Complete service disruption; blocks system workflow. |
+| **HIGH** | 24 Hours | Critical features broken; no reasonable workaround available. |
+| **MEDIUM** | 3 Days | Functional issue with workarounds; moderate business impact. |
+| **LOW** | 7 Days | General questions, cosmetic tweaks, or minor inconveniences. |
+
+### SLA Rules & Transition Enforcement
+- **Ok (On Track)**: Remaining time is greater than 25% of the total SLA window.
+- **At Risk**: Remaining time is less than or equal to 25% of the total SLA window.
+- **Breached**: Resolution time has exceeded the SLA window.
+- **Overdue Constraint Enforcement**: Closed transitions for overdue CRITICAL issues are blocked if they bypass the `VERIFICATION` stage first. This ensures all critical, SLA-breached bugs undergo manual QA testing prior to final sign-off.
+
+---
+
+## Rate Limiting & Security Hardening
+
+To protect the application endpoints from automated brute force attacks and database exhaustion, the following measures are enforced at the network boundaries:
+1. **Login Throttle**: Rate limited to **5 attempts per minute** per client IP. Prevents credential stuffing attacks.
+2. **File Upload Limit**: Upload API endpoint is restricted to authenticated sessions and rate-limited to **10 uploads per minute** per IP.
+3. **Payload Inspection**: Files uploaded are restricted to a maximum size of **4MB** and validated against a strict MIME type allowlist (`image/*`, `application/pdf`, `text/plain`, `application/zip`) on the server before hitting Vercel Blob storage.
+
+---
+
+## Error Handling & Loading States
+
+Every authenticated route features dedicated Next.js client-side error boundaries and loading skeletons for a fluid, glassmorphic-themed user experience:
+- **Loading Skeletons (`loading.tsx`)**: Responsive, CSS-animated card and table layouts mimicking real content using themed glow variables.
+- **Error Boundaries (`error.tsx`)**: Themed client boundaries catch runtime errors and offer safe, one-click recovery via a "Try Again" (`reset()`) retry button.
+
+---
+
+## Lighthouse Scores
+
+Record of the Lighthouse scores measured against local builds or deployment URLs:
+
+| Metric | Score | Notes / Verification Steps |
+| :--- | :--- | :--- |
+| **Performance** | `--` | Run locally using `npm run build` and `npm run start` |
+| **Accessibility** | `--` | Verify form landmarks, wizard keyboard flow, and focus states |
+| **Best Practices** | `--` | Secured via rate limit throttles and strict upload routes |
+| **SEO** | `--` | Handled by Next.js meta rendering |
+
+---
+
+## Screenshots
+
+To capture screenshots of the platform for submission:
+1. **Login & Registration**: Capture the clean dark-mode input gates.
+2. **Dashboard Queues**: View role-specific workspaces and SLA badges.
+3. **Guided Form Wizard**: Capture steps 1–6 showing the progressive disclosure forms.
+4. **Issue Detail & Activity Timeline**: Review comment sections and attachment previews.

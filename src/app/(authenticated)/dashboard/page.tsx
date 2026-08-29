@@ -4,6 +4,7 @@ import { redirect } from 'next/navigation';
 import { Role, IssueStatus, Severity, Priority } from '@prisma/client';
 import Link from 'next/link';
 import { formatDate } from '@/lib/date';
+import { getSlaStatus } from '@/lib/sla';
 
 export default async function DashboardPage() {
   const session = await getSession();
@@ -415,6 +416,17 @@ function IssueTable({ issues }: { issues: any[] }) {
     }
   };
 
+  const getSlaBadge = (status: 'ok' | 'at-risk' | 'breached') => {
+    switch (status) {
+      case 'breached':
+        return <span style={{ ...styles.slaBadge, backgroundColor: 'rgba(239, 68, 68, 0.15)', color: '#fca5a5', border: '1px solid rgba(239, 68, 68, 0.3)' }}>🔴 BREACHED</span>;
+      case 'at-risk':
+        return <span style={{ ...styles.slaBadge, backgroundColor: 'rgba(245, 158, 11, 0.15)', color: '#fbbf24', border: '1px solid rgba(245, 158, 11, 0.3)' }}>🟡 AT RISK</span>;
+      case 'ok':
+        return <span style={{ ...styles.slaBadge, backgroundColor: 'rgba(16, 185, 129, 0.15)', color: '#34d399', border: '1px solid rgba(16, 185, 129, 0.3)' }}>🟢 ON TRACK</span>;
+    }
+  };
+
   return (
     <div style={styles.tableWrapper}>
       <table style={styles.table}>
@@ -424,40 +436,47 @@ function IssueTable({ issues }: { issues: any[] }) {
             <th style={styles.tableTh}>Summary</th>
             <th style={styles.tableTh}>Status</th>
             <th style={styles.tableTh}>Severity</th>
+            <th style={styles.tableTh}>SLA</th>
             <th style={styles.tableTh}>Owner</th>
             <th style={styles.tableTh}>Updated</th>
           </tr>
         </thead>
         <tbody>
-          {issues.map((issue) => (
-            <tr key={issue.id} style={styles.tableRow}>
-              <td style={styles.tableTdKey}>
-                <Link href={`/issues/${issue.key}`} style={styles.issueLink}>
-                  {issue.key}
-                </Link>
-              </td>
-              <td style={styles.tableTdSummary}>
-                <Link href={`/issues/${issue.key}`} style={styles.issueLinkText}>
-                  {issue.title}
-                </Link>
-              </td>
-              <td style={styles.tableTd}>
-                <span style={{ ...styles.statusDot, backgroundColor: getStatusColor(issue.status) }}></span>
-                <span style={styles.statusLabel}>{issue.status}</span>
-              </td>
-              <td style={styles.tableTd}>
-                <span style={{ ...styles.severityBadge, ...getSeverityStyle(issue.severity) }}>
-                  {issue.severity}
-                </span>
-              </td>
-              <td style={styles.tableTdOwner}>
-                {issue.assignee?.name || issue.reporter?.name || 'Unassigned'}
-              </td>
-              <td style={styles.tableTdDate}>
-                {formatDate(issue.updatedAt)}
-              </td>
-            </tr>
-          ))}
+          {issues.map((issue) => {
+            const slaStatus = getSlaStatus(issue.severity, issue.createdAt);
+            return (
+              <tr key={issue.id} style={styles.tableRow}>
+                <td style={styles.tableTdKey}>
+                  <Link href={`/issues/${issue.key}`} style={styles.issueLink}>
+                    {issue.key}
+                  </Link>
+                </td>
+                <td style={styles.tableTdSummary}>
+                  <Link href={`/issues/${issue.key}`} style={styles.issueLinkText}>
+                    {issue.title}
+                  </Link>
+                </td>
+                <td style={styles.tableTd}>
+                  <span style={{ ...styles.statusDot, backgroundColor: getStatusColor(issue.status) }}></span>
+                  <span style={styles.statusLabel}>{issue.status}</span>
+                </td>
+                <td style={styles.tableTd}>
+                  <span style={{ ...styles.severityBadge, ...getSeverityStyle(issue.severity) }}>
+                    {issue.severity}
+                  </span>
+                </td>
+                <td style={styles.tableTd}>
+                  {getSlaBadge(slaStatus)}
+                </td>
+                <td style={styles.tableTdOwner}>
+                  {issue.assignee?.name || issue.reporter?.name || 'Unassigned'}
+                </td>
+                <td style={styles.tableTdDate}>
+                  {formatDate(issue.updatedAt)}
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </div>
@@ -672,5 +691,13 @@ const styles = {
     padding: '1rem',
     fontSize: '0.85rem',
     color: '#6b7280',
+  },
+  slaBadge: {
+    fontSize: '0.7rem',
+    fontWeight: 700,
+    padding: '0.2rem 0.5rem',
+    borderRadius: '4px',
+    textTransform: 'uppercase' as const,
+    whiteSpace: 'nowrap' as const,
   },
 };

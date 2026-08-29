@@ -5,6 +5,7 @@ import { IssueStatus, Severity, Priority, Role } from '@prisma/client';
 import { SessionUser } from '@/lib/session';
 import Link from 'next/link';
 import { formatDate } from '@/lib/date';
+import { computeSlaDeadline, getSlaStatus } from '@/lib/sla';
 
 interface UserSelectOption {
   id: string;
@@ -46,6 +47,9 @@ export default function WorkspaceClient({
   const [commentText, setCommentText] = useState('');
   const [loadingComment, setLoadingComment] = useState(false);
   const [loadingAttachment, setLoadingAttachment] = useState(false);
+
+  const deadline = computeSlaDeadline(issue.severity, new Date(issue.createdAt));
+  const slaStatus = getSlaStatus(issue.severity, new Date(issue.createdAt));
 
   // File states
   const [fileName, setFileName] = useState('');
@@ -632,6 +636,26 @@ export default function WorkspaceClient({
             </div>
 
             <div style={styles.attributeGroup}>
+              <span style={styles.attributeLabel}>SLA Status</span>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginTop: '0.25rem' }}>
+                {slaStatus === 'breached' && (
+                  <span style={{ ...styles.slaBadge, backgroundColor: 'rgba(239, 68, 68, 0.15)', color: '#fca5a5', border: '1px solid rgba(239, 68, 68, 0.3)' }}>🔴 BREACHED</span>
+                )}
+                {slaStatus === 'at-risk' && (
+                  <span style={{ ...styles.slaBadge, backgroundColor: 'rgba(245, 158, 11, 0.15)', color: '#fbbf24', border: '1px solid rgba(245, 158, 11, 0.3)' }}>🟡 AT RISK</span>
+                )}
+                {slaStatus === 'ok' && (
+                  <span style={{ ...styles.slaBadge, backgroundColor: 'rgba(16, 185, 129, 0.15)', color: '#34d399', border: '1px solid rgba(16, 185, 129, 0.3)' }}>🟢 ON TRACK</span>
+                )}
+              </div>
+            </div>
+
+            <div style={styles.attributeGroup}>
+              <span style={styles.attributeLabel}>SLA Deadline</span>
+              <span style={styles.attributeValText}>{formatDate(deadline)}</span>
+            </div>
+
+            <div style={styles.attributeGroup}>
               <span style={styles.attributeLabel}>Project</span>
               <span style={styles.attributeValText}>{issue.project.name}</span>
             </div>
@@ -1152,5 +1176,13 @@ const styles = {
   attributeValText: {
     fontSize: '0.9rem',
     color: '#ffffff',
+  },
+  slaBadge: {
+    fontSize: '0.7rem',
+    fontWeight: 700,
+    padding: '0.2rem 0.5rem',
+    borderRadius: '4px',
+    textTransform: 'uppercase' as const,
+    whiteSpace: 'nowrap' as const,
   },
 };

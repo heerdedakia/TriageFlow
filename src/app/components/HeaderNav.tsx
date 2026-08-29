@@ -13,11 +13,11 @@ interface HeaderNavProps {
 }
 
 export default function HeaderNav({ user, notifications: initialNotifications }: HeaderNavProps) {
-  const [notifications, setNotifications] = useState<Notification[]>(initialNotifications);
+  const [notifications, setNotifications] = useState<Notification[]>(initialNotifications || []);
   const [notifOpen, setNotifOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
 
-  const unreadCount = notifications.filter(n => !n.isRead).length;
+  const unreadCount = (notifications || []).filter(n => !n.isRead).length;
 
   const handleNotifClick = async (id: string) => {
     // Optimistic update
@@ -81,7 +81,7 @@ export default function HeaderNav({ user, notifications: initialNotifications }:
                 {unreadCount > 0 && <span style={styles.unreadSummary}>{unreadCount} unread</span>}
               </div>
               <div style={styles.dropdownBody}>
-                {notifications.length === 0 ? (
+                {!notifications || notifications.length === 0 ? (
                   <p style={styles.emptyNotifs}>No notifications yet.</p>
                 ) : (
                   notifications.map((notif) => (

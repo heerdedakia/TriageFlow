@@ -78,7 +78,11 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
           <div style={styles.card}>
             <h2>🧱 Project Components</h2>
             {project.components.length === 0 ? (
-              <p style={styles.emptyText}>No components have been registered for this project yet.</p>
+              <div style={styles.emptyCard}>
+                <span style={styles.emptyIcon}>🧱</span>
+                <p style={styles.emptyCardTitle}>No Components Yet</p>
+                <p style={styles.emptyCardSub}>Create components in the right sidebar to categorize bugs.</p>
+              </div>
             ) : (
               <div style={styles.tableWrapper}>
                 <table style={styles.table}>
@@ -113,7 +117,11 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
             </div>
 
             {project.issues.length === 0 ? (
-              <p style={styles.emptyText}>No issues reported for this project. Keep it up!</p>
+              <div style={styles.emptyCard}>
+                <span style={styles.emptyIcon}>🐛</span>
+                <p style={styles.emptyCardTitle}>Clean Slate!</p>
+                <p style={styles.emptyCardSub}>No active issues reported for this project. Keep up the good work!</p>
+              </div>
             ) : (
               <div style={styles.tableWrapper}>
                 <table style={styles.table}>
@@ -405,5 +413,31 @@ const styles = {
   },
   issueTd: {
     padding: '1rem',
+  },
+  emptyCard: {
+    display: 'flex',
+    flexDirection: 'column' as const,
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: '3rem 1.5rem',
+    borderRadius: '8px',
+    backgroundColor: 'rgba(255, 255, 255, 0.02)',
+    border: '1px dashed rgba(255, 255, 255, 0.08)',
+    textAlign: 'center' as const,
+  },
+  emptyIcon: {
+    fontSize: '2.5rem',
+    marginBottom: '0.75rem',
+  },
+  emptyCardTitle: {
+    fontSize: '1.1rem',
+    fontWeight: 600,
+    color: '#ffffff',
+    marginBottom: '0.25rem',
+  },
+  emptyCardSub: {
+    fontSize: '0.85rem',
+    color: '#9ca3af',
+    maxWidth: '300px',
   },
 };

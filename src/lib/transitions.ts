@@ -1,6 +1,14 @@
-import { Role, IssueStatus } from '@prisma/client';
+import { Role, IssueStatus, Severity } from '@prisma/client';
+import { getSlaStatus } from './sla';
 
-export type TransitionCtx = { sessionRole: Role; assigneeId: string | null; reporterId: string; sessionId: string };
+export type TransitionCtx = { 
+  sessionRole: Role; 
+  assigneeId: string | null; 
+  reporterId: string; 
+  sessionId: string;
+  severity?: Severity;
+  createdAt?: Date;
+};
 
 const checkRole = (role: Role, allowed: Role[]) => allowed.includes(role);
 
@@ -8,12 +16,24 @@ export const TRANSITIONS: Record<IssueStatus, Partial<Record<IssueStatus, (ctx: 
   NEW: {
     TRIAGED: (ctx) => checkRole(ctx.sessionRole, [Role.ADMIN, Role.PROJECT_MANAGER, Role.QA]),
     ASSIGNED: (ctx) => checkRole(ctx.sessionRole, [Role.ADMIN, Role.PROJECT_MANAGER, Role.QA]),
-    CLOSED: (ctx) => checkRole(ctx.sessionRole, [Role.ADMIN, Role.PROJECT_MANAGER]), // reject/won't-fix path
+    CLOSED: (ctx) => {
+      // Overdue critical issues cannot bypass verification
+      if (ctx.severity === Severity.CRITICAL && ctx.createdAt && getSlaStatus(Severity.CRITICAL, ctx.createdAt) === 'breached') {
+        return false;
+      }
+      return checkRole(ctx.sessionRole, [Role.ADMIN, Role.PROJECT_MANAGER]);
+    },
   },
   TRIAGED: {
     ASSIGNED: (ctx) => checkRole(ctx.sessionRole, [Role.ADMIN, Role.PROJECT_MANAGER, Role.QA]),
     NEW: (ctx) => checkRole(ctx.sessionRole, [Role.ADMIN, Role.PROJECT_MANAGER, Role.QA]),
-    CLOSED: (ctx) => checkRole(ctx.sessionRole, [Role.ADMIN, Role.PROJECT_MANAGER]),
+    CLOSED: (ctx) => {
+      // Overdue critical issues cannot bypass verification
+      if (ctx.severity === Severity.CRITICAL && ctx.createdAt && getSlaStatus(Severity.CRITICAL, ctx.createdAt) === 'breached') {
+        return false;
+      }
+      return checkRole(ctx.sessionRole, [Role.ADMIN, Role.PROJECT_MANAGER]);
+    },
   },
   ASSIGNED: {
     TRIAGED: (ctx) => checkRole(ctx.sessionRole, [Role.ADMIN, Role.PROJECT_MANAGER, Role.QA]),

@@ -5,6 +5,8 @@ import { db } from '@/lib/db';
 import { comparePassword, hashPassword, createSession, deleteSession } from '@/lib/auth';
 import { redirect } from 'next/navigation';
 import { Role } from '@prisma/client';
+import { headers } from 'next/headers';
+import { rateLimit } from '@/lib/rate-limit';
 
 const loginSchema = z.object({
   email: z.string().email('Invalid email address'),
@@ -21,6 +23,12 @@ const registerSchema = z.object({
 export type AuthState = { error?: string } | null | undefined;
 
 export async function loginUser(prevState: AuthState, formData: FormData) {
+  const ip = headers().get('x-forwarded-for')?.split(',')[0] || '127.0.0.1';
+  const rateLimitResult = rateLimit(ip, { max: 5, windowMs: 60000 });
+  if (!rateLimitResult.success) {
+    return { error: 'Too many login attempts. Please try again in a minute.' };
+  }
+
   const email = formData.get('email') as string;
   const password = formData.get('password') as string;
 

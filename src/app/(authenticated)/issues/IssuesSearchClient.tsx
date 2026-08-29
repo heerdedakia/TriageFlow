@@ -4,6 +4,7 @@ import { useState, useMemo } from 'react';
 import Link from 'next/link';
 import { Severity, Priority, IssueStatus } from '@prisma/client';
 import { SessionUser } from '@/lib/session';
+import { getSlaStatus } from '@/lib/sla';
 
 interface SavedFilterRecord {
   id: string;
@@ -250,7 +251,10 @@ export default function IssuesSearchClient({
           )}
 
           {savedFilters.length === 0 ? (
-            <p style={styles.emptySavedFilters}>No saved filters yet.</p>
+            <div style={styles.emptySavedFiltersCard}>
+              <span style={{ fontSize: '1.25rem', marginBottom: '0.25rem', display: 'block' }}>📁</span>
+              <p style={{ fontSize: '0.8rem', color: '#9ca3af' }}>No saved filters yet.</p>
+            </div>
           ) : (
             <ul style={styles.savedFiltersList}>
               {savedFilters.map((filter) => (
@@ -395,6 +399,7 @@ export default function IssuesSearchClient({
                     <th style={styles.tableTh}>Component</th>
                     <th style={styles.tableTh}>Status</th>
                     <th style={styles.tableTh}>Severity</th>
+                    <th style={styles.tableTh}>SLA</th>
                     <th style={styles.tableTh}>Assignee</th>
                   </tr>
                 </thead>
@@ -421,6 +426,16 @@ export default function IssuesSearchClient({
                         <span style={{ ...styles.severityBadge, ...getSeverityStyle(issue.severity) }}>
                           {issue.severity}
                         </span>
+                      </td>
+                      <td style={styles.issueTd}>
+                        {(() => {
+                          const sla = getSlaStatus(issue.severity, new Date(issue.createdAt));
+                          switch (sla) {
+                            case 'breached': return <span style={{ ...styles.slaBadge, backgroundColor: 'rgba(239, 68, 68, 0.15)', color: '#fca5a5', border: '1px solid rgba(239, 68, 68, 0.3)' }}>🔴 BREACHED</span>;
+                            case 'at-risk': return <span style={{ ...styles.slaBadge, backgroundColor: 'rgba(245, 158, 11, 0.15)', color: '#fbbf24', border: '1px solid rgba(245, 158, 11, 0.3)' }}>🟡 AT RISK</span>;
+                            default: return <span style={{ ...styles.slaBadge, backgroundColor: 'rgba(16, 185, 129, 0.15)', color: '#34d399', border: '1px solid rgba(16, 185, 129, 0.3)' }}>🟢 ON TRACK</span>;
+                          }
+                        })()}
                       </td>
                       <td style={styles.issueTdText}>{issue.assignee?.name || <span style={{ color: '#6b7280' }}>Unassigned</span>}</td>
                     </tr>
@@ -713,5 +728,25 @@ const styles = {
   },
   issueTd: {
     padding: '1rem',
+  },
+  emptySavedFiltersCard: {
+    display: 'flex',
+    flexDirection: 'column' as const,
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: '1.5rem 1rem',
+    borderRadius: '8px',
+    backgroundColor: 'rgba(255, 255, 255, 0.02)',
+    border: '1px dashed rgba(255, 255, 255, 0.08)',
+    textAlign: 'center' as const,
+    marginTop: '0.5rem',
+  },
+  slaBadge: {
+    fontSize: '0.7rem',
+    fontWeight: 700,
+    padding: '0.2rem 0.5rem',
+    borderRadius: '4px',
+    textTransform: 'uppercase' as const,
+    whiteSpace: 'nowrap' as const,
   },
 };

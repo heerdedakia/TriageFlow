@@ -288,6 +288,8 @@ export async function transitionIssueStatus(issueId: string, newStatus: IssueSta
       assigneeId: issue.assigneeId,
       reporterId: issue.reporterId,
       sessionId: session.id,
+      severity: issue.severity,
+      createdAt: issue.createdAt,
     });
 
     if (!isAllowed) {

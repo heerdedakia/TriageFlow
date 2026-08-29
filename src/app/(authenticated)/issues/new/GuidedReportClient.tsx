@@ -50,6 +50,7 @@ export default function GuidedReportClient({ projects, initialProjectId, createI
   const [fileMimeType, setFileMimeType] = useState('');
   const [fileSize, setFileSize] = useState(0);
   const [dragging, setDragging] = useState(false);
+  const [fileInputFocused, setFileInputFocused] = useState(false);
 
   // Classification Fields (Plain English options)
   const initialProjName = projects.find(p => p.id === initialProjectId)?.name || '';
@@ -250,8 +251,8 @@ export default function GuidedReportClient({ projects, initialProjectId, createI
 
         {/* STEP 1: PROBLEM */}
         {activeStep === 1 && (
-          <div style={styles.stepContent}>
-            <h2>❓ Step 1: Describe the Problem</h2>
+          <div style={styles.stepContent} role="group" aria-labelledby="step-1-title">
+            <h2 id="step-1-title">❓ Step 1: Describe the Problem</h2>
             <p style={styles.stepDesc}>Briefly summarize what is wrong, specify the URL if applicable, and write details about the bug.</p>
 
             <div style={styles.fieldGroup}>
@@ -296,8 +297,8 @@ export default function GuidedReportClient({ projects, initialProjectId, createI
 
         {/* STEP 2: REPRODUCTION */}
         {activeStep === 2 && (
-          <div style={styles.stepContent}>
-            <h2>🔁 Step 2: How to Reproduce</h2>
+          <div style={styles.stepContent} role="group" aria-labelledby="step-2-title">
+            <h2 id="step-2-title">🔁 Step 2: How to Reproduce</h2>
             <p style={styles.stepDesc}>Outline the actions you took and what happened.</p>
 
             <div style={styles.fieldGroup}>
@@ -342,8 +343,8 @@ export default function GuidedReportClient({ projects, initialProjectId, createI
 
         {/* STEP 3: ENVIRONMENT */}
         {activeStep === 3 && (
-          <div style={styles.stepContent}>
-            <h2>💻 Step 3: Run Environment</h2>
+          <div style={styles.stepContent} role="group" aria-labelledby="step-3-title">
+            <h2 id="step-3-title">💻 Step 3: Run Environment</h2>
             <p style={styles.stepDesc}>State details about your operating system and browser (we have auto-detected these, you can edit if needed).</p>
 
             <div style={styles.gridFields}>
@@ -376,8 +377,8 @@ export default function GuidedReportClient({ projects, initialProjectId, createI
 
         {/* STEP 4: EVIDENCE */}
         {activeStep === 4 && (
-          <div style={styles.stepContent}>
-            <h2>📎 Step 4: Evidence & Logs</h2>
+          <div style={styles.stepContent} role="group" aria-labelledby="step-4-title">
+            <h2 id="step-4-title">📎 Step 4: Evidence & Logs</h2>
             <p style={styles.stepDesc}>Attach a screenshot, error log, or console output file to help illustrate the issue.</p>
 
             <div
@@ -386,8 +387,9 @@ export default function GuidedReportClient({ projects, initialProjectId, createI
               onDrop={handleDrop}
               style={{
                 ...styles.dropzone,
-                borderColor: dragging ? '#6366f1' : 'rgba(255,255,255,0.08)',
-                backgroundColor: dragging ? 'rgba(99,102,241,0.03)' : 'rgba(255,255,255,0.01)',
+                borderColor: dragging || fileInputFocused ? '#6366f1' : 'rgba(255,255,255,0.08)',
+                backgroundColor: dragging || fileInputFocused ? 'rgba(99,102,241,0.03)' : 'rgba(255,255,255,0.01)',
+                outline: fileInputFocused ? '2px dashed #6366f1' : 'none',
               }}
             >
               <div style={styles.dropzoneContent}>
@@ -398,6 +400,8 @@ export default function GuidedReportClient({ projects, initialProjectId, createI
                   id="issue-file"
                   type="file"
                   onChange={handleFileChange}
+                  onFocus={() => setFileInputFocused(true)}
+                  onBlur={() => setFileInputFocused(false)}
                   style={styles.fileInput}
                   accept="image/*,.log,.txt,.pdf"
                 />
@@ -430,8 +434,8 @@ export default function GuidedReportClient({ projects, initialProjectId, createI
 
         {/* STEP 5: CLASSIFICATION */}
         {activeStep === 5 && (
-          <div style={styles.stepContent}>
-            <h2>🏷️ Step 5: Issue Classification</h2>
+          <div style={styles.stepContent} role="group" aria-labelledby="step-5-title">
+            <h2 id="step-5-title">🏷️ Step 5: Issue Classification</h2>
             <p style={styles.stepDesc}>Specify the product/project name and select how serious the bug is.</p>
 
             <div style={styles.fieldGroup}>
@@ -480,8 +484,8 @@ export default function GuidedReportClient({ projects, initialProjectId, createI
 
         {/* STEP 6: REVIEW */}
         {activeStep === 6 && (
-          <div style={styles.stepContent}>
-            <h2>📋 Step 6: Review & Submit</h2>
+          <div style={styles.stepContent} role="group" aria-labelledby="step-6-title">
+            <h2 id="step-6-title">📋 Step 6: Review & Submit</h2>
             <p style={styles.stepDesc}>Review all bug specifications before submitting to the developer queue.</p>
 
             <div style={styles.reviewWrapper}>
