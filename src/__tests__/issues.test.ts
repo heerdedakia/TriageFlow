@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
-import { TRANSITIONS, type TransitionCtx } from '../app/actions/issues';
+import { TRANSITIONS, type TransitionCtx } from '@/lib/transitions';
 import { IssueStatus, Role } from '@prisma/client';
 
 describe('Workflow Permissions (TRANSITIONS)', () => {

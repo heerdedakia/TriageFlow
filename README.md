@@ -79,3 +79,47 @@ Open [http://localhost:3000](http://localhost:3000) in your browser to view the 
    ```bash
    prisma generate && prisma migrate deploy && next build
    ```
+
+---
+
+## System Architecture
+
+```mermaid
+graph TD
+    Client[Next.js Client Components] -->|Server Actions| Server[Next.js App Router]
+    Server -->|jose JWT| Auth[Auth Layer]
+    Server -->|Prisma ORM| Database[(PostgreSQL)]
+    Client -->|Uploads| BlobStore[(Vercel Blob)]
+```
+
+## Status Transition Permission Matrix
+
+```mermaid
+stateDiagram-v2
+    [*] --> NEW: Report Issue (All)
+    NEW --> TRIAGED: Admin, PM, QA
+    NEW --> ASSIGNED: Admin, PM, QA
+    NEW --> CLOSED: Admin, PM
+    TRIAGED --> ASSIGNED: Admin, PM, QA
+    TRIAGED --> NEW: Admin, PM, QA
+    TRIAGED --> CLOSED: Admin, PM
+    ASSIGNED --> IN_PROGRESS: Assignee, Admin, PM
+    ASSIGNED --> TRIAGED: Admin, PM, QA
+    IN_PROGRESS --> ASSIGNED: Assignee, Admin, PM
+    IN_PROGRESS --> RESOLVED: Assignee, Admin, PM
+    IN_PROGRESS --> VERIFICATION: Assignee, Admin, PM
+    RESOLVED --> VERIFICATION: Assignee, Admin, PM
+    RESOLVED --> IN_PROGRESS: QA, Admin, PM, Reporter
+    RESOLVED --> NEW: QA, Admin, PM, Reporter
+    VERIFICATION --> CLOSED: QA, Admin, PM, Reporter
+    VERIFICATION --> IN_PROGRESS: QA, Admin, PM, Reporter
+    VERIFICATION --> NEW: QA, Admin, PM, Reporter
+    CLOSED --> IN_PROGRESS: QA, Admin, PM, Reporter
+    CLOSED --> NEW: QA, Admin, PM, Reporter
+```
+
+## Known Limitations
+
+- **Email Notifications**: Currently mocked. Real email integrations (e.g. Resend or SendGrid) are not implemented yet.
+- **WebSocket/Real-time Updates**: Real-time pushes via WebSockets are absent; Next.js server actions mutate data and call `revalidatePath`.
+- **Advanced Rich Text**: Comments support markdown visually but an advanced WYSIWYG editor is missing.
