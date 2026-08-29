@@ -125,7 +125,7 @@ model Attachment {
   issueId      String
   issue        Issue    @relation(fields: [issueId], references: [id], onDelete: Cascade)
   name         String
-  url          String   // Storage URL or DB fallback base64
+  url          String   // Vercel Blob object storage URL (replaced legacy base64 fallback to prevent DB bloat)
   mimeType     String
   size         Int
   uploadedById String

@@ -37,6 +37,7 @@ export async function addAttachment(data: AddAttachmentData) {
 
     await db.$transaction(async (tx) => {
       // 1. Create attachment record
+      // The `url` here is now a real Vercel Blob URL, as uploaded by the client side `/api/upload` endpoint.
       await tx.attachment.create({
         data: {
           issueId: result.data.issueId,

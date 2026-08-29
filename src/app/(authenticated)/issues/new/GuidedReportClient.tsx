@@ -110,8 +110,7 @@ export default function GuidedReportClient({ projects, initialProjectId, createI
     setActiveStep((prev) => Math.max(prev - 1, 1));
   };
 
-  // Convert uploaded file to base64
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement> | DragEvent) => {
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement> | DragEvent) => {
     let file: File | undefined;
     
     if ('dataTransfer' in e && e.dataTransfer) {
@@ -133,14 +132,31 @@ export default function GuidedReportClient({ projects, initialProjectId, createI
     setFileName(file.name);
     setFileMimeType(file.type);
     setFileSize(file.size);
+    setLoading(true);
 
-    const reader = new FileReader();
-    reader.onload = (event) => {
-      if (event.target?.result) {
-        setFileUrl(event.target.result as string);
+    try {
+      const formData = new FormData();
+      formData.append('file', file);
+      
+      const res = await fetch('/api/upload', {
+        method: 'POST',
+        body: formData,
+      });
+      
+      if (!res.ok) {
+        throw new Error('Upload failed');
       }
-    };
-    reader.readAsDataURL(file);
+      
+      const data = await res.json();
+      setFileUrl(data.url);
+    } catch (err) {
+      setError('Failed to upload attachment. Please try again.');
+      setFileName('');
+      setFileMimeType('');
+      setFileSize(0);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleDragOver = (e: React.DragEvent) => {
