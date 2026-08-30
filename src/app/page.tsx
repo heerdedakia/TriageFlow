@@ -132,10 +132,10 @@ const styles = {
     letterSpacing: '-0.03em',
   },
   logoBug: {
-    color: '#ffffff',
+    color: 'var(--text-main)',
   },
   logoDtr: {
-    color: '#8b5cf6',
+    color: 'var(--primary)',
     marginLeft: '0.2rem',
     background: 'rgba(139, 92, 246, 0.1)',
     padding: '0.2rem 0.5rem',
@@ -149,7 +149,7 @@ const styles = {
   loginBtn: {
     padding: '0.5rem 1.25rem',
     borderRadius: '8px',
-    color: '#ffffff',
+    color: 'var(--text-main)',
     fontWeight: 500,
     background: 'transparent',
     border: '1px solid rgba(255, 255, 255, 0.1)',
@@ -157,8 +157,8 @@ const styles = {
   registerBtn: {
     padding: '0.5rem 1.25rem',
     borderRadius: '8px',
-    backgroundColor: '#8b5cf6',
-    color: '#ffffff',
+    backgroundColor: 'var(--primary)',
+    color: 'var(--text-main)',
     fontWeight: 500,
     boxShadow: '0 0 15px rgba(139, 92, 246, 0.3)',
   },
@@ -179,8 +179,8 @@ const styles = {
     margin: '0 auto',
   },
   badge: {
-    background: 'linear-gradient(90deg, #8b5cf6, #a78bfa)',
-    color: '#ffffff',
+    background: 'linear-gradient(90deg, var(--primary), var(--secondary))',
+    color: 'var(--text-main)',
     fontSize: '0.75rem',
     fontWeight: 700,
     padding: '0.35rem 0.8rem',
@@ -192,7 +192,7 @@ const styles = {
     fontSize: '3.5rem',
     lineHeight: '1.1',
     fontWeight: 800,
-    color: '#ffffff',
+    color: 'var(--text-main)',
     letterSpacing: '-0.04em',
   },
   gradientText: {
@@ -202,7 +202,7 @@ const styles = {
   },
   subtitle: {
     fontSize: '1.25rem',
-    color: '#9ca3af',
+    color: 'var(--text-muted)',
     maxWidth: '650px',
     lineHeight: '1.6',
   },
@@ -214,8 +214,8 @@ const styles = {
   primaryCta: {
     padding: '0.75rem 2rem',
     borderRadius: '10px',
-    backgroundColor: '#8b5cf6',
-    color: '#ffffff',
+    backgroundColor: 'var(--primary)',
+    color: 'var(--text-main)',
     fontWeight: 600,
     fontSize: '1.05rem',
     boxShadow: '0 0 25px rgba(139, 92, 246, 0.4)',
@@ -224,10 +224,10 @@ const styles = {
     padding: '0.75rem 2rem',
     borderRadius: '10px',
     backgroundColor: 'rgba(255, 255, 255, 0.05)',
-    color: '#ffffff',
+    color: 'var(--text-main)',
     fontWeight: 600,
     fontSize: '1.05rem',
-    border: '1px solid rgba(255, 255, 255, 0.08)',
+    border: '1px solid var(--border-color)',
   },
   features: {
     display: 'flex',
@@ -238,7 +238,7 @@ const styles = {
     fontSize: '2rem',
     textAlign: 'center' as const,
     fontWeight: 700,
-    color: '#ffffff',
+    color: 'var(--text-main)',
   },
   grid: {
     display: 'grid',
@@ -248,8 +248,8 @@ const styles = {
   card: {
     padding: '2rem',
     borderRadius: '12px',
-    backgroundColor: 'rgba(17, 19, 28, 0.65)',
-    border: '1px solid rgba(255, 255, 255, 0.06)',
+    backgroundColor: 'var(--bg-card)',
+    border: '1px solid var(--border-color)',
     backdropFilter: 'blur(12px)',
     transition: 'transform 0.2s ease',
   },
@@ -260,7 +260,7 @@ const styles = {
     fontWeight: 600,
   },
   cardDesc: {
-    color: '#9ca3af',
+    color: 'var(--text-muted)',
     fontSize: '0.95rem',
     lineHeight: '1.5',
   },
@@ -275,7 +275,7 @@ const styles = {
   },
   demoDesc: {
     fontSize: '1.1rem',
-    color: '#9ca3af',
+    color: 'var(--text-muted)',
     textAlign: 'center' as const,
     maxWidth: '700px',
     margin: '0 auto',
@@ -294,7 +294,7 @@ const styles = {
   },
   tableTh: {
     padding: '1rem',
-    color: '#ffffff',
+    color: 'var(--text-main)',
     fontWeight: 600,
     fontSize: '0.95rem',
   },
@@ -304,21 +304,21 @@ const styles = {
   tableTdRole: {
     padding: '1.2rem 1rem',
     fontWeight: 600,
-    color: '#ffffff',
+    color: 'var(--text-main)',
   },
   tableTdEmail: {
     padding: '1.2rem 1rem',
-    color: '#a78bfa',
+    color: 'var(--secondary)',
   },
   tableTdPass: {
     padding: '1.2rem 1rem',
-    color: '#9ca3af',
+    color: 'var(--text-muted)',
   },
   footer: {
     padding: '3rem 0',
     borderTop: '1px solid rgba(255, 255, 255, 0.05)',
     textAlign: 'center' as const,
-    color: '#6b7280',
+    color: 'var(--text-muted)',
     fontSize: '0.9rem',
     marginTop: 'auto',
   },

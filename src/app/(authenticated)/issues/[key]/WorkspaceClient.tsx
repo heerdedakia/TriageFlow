@@ -61,9 +61,9 @@ export default function WorkspaceClient({
     switch (status) {
       case 'NEW': return '#3b82f6';
       case 'TRIAGED': return '#06b6d4';
-      case 'ASSIGNED': return '#8b5cf6';
+      case 'ASSIGNED': return 'var(--primary)';
       case 'IN_PROGRESS': return '#f59e0b';
-      case 'RESOLVED': return '#a78bfa';
+      case 'RESOLVED': return 'var(--secondary)';
       case 'VERIFICATION': return '#ec4899';
       case 'CLOSED': return '#6b7280';
     }
@@ -260,7 +260,7 @@ export default function WorkspaceClient({
                     backgroundColor: isActive
                       ? getStatusColor(status)
                       : isCompleted
-                      ? '#a78bfa'
+                      ? 'var(--secondary)'
                       : 'rgba(255,255,255,0.04)',
                     borderColor: isActive ? '#ffffff' : 'transparent',
                     boxShadow: isActive ? `0 0 15px ${getStatusColor(status)}` : 'none',
@@ -281,7 +281,7 @@ export default function WorkspaceClient({
                   <div
                     style={{
                       ...styles.statusConnector,
-                      backgroundColor: index < activeIndex ? '#a78bfa' : 'rgba(255,255,255,0.06)',
+                      backgroundColor: index < activeIndex ? 'var(--secondary)' : 'rgba(255,255,255,0.06)',
                     }}
                   />
                 )}
@@ -676,7 +676,7 @@ function getSeverityStyle(sev: string) {
     case 'CRITICAL': return { backgroundColor: 'rgba(239, 68, 68, 0.15)', color: '#fca5a5' };
     case 'HIGH': return { backgroundColor: 'rgba(245, 158, 11, 0.15)', color: '#fbbf24' };
     case 'MEDIUM': return { backgroundColor: 'rgba(6, 182, 212, 0.15)', color: '#22d3ee' };
-    default: return { backgroundColor: 'rgba(156, 163, 175, 0.15)', color: '#9ca3af' };
+    default: return { backgroundColor: 'rgba(156, 163, 175, 0.15)', color: 'var(--text-muted)' };
   }
 }
 
@@ -684,8 +684,8 @@ function getPriorityStyle(pri: string) {
   switch (pri) {
     case 'URGENT': return { backgroundColor: 'rgba(239, 68, 68, 0.15)', color: '#fca5a5' };
     case 'HIGH': return { backgroundColor: 'rgba(245, 158, 11, 0.15)', color: '#fbbf24' };
-    case 'MEDIUM': return { backgroundColor: 'rgba(139, 92, 246, 0.15)', color: '#a5b4fc' };
-    default: return { backgroundColor: 'rgba(156, 163, 175, 0.15)', color: '#9ca3af' };
+    case 'MEDIUM': return { backgroundColor: 'var(--primary-glow)', color: '#a5b4fc' };
+    default: return { backgroundColor: 'rgba(156, 163, 175, 0.15)', color: 'var(--text-muted)' };
   }
 }
 
@@ -698,7 +698,7 @@ const styles = {
   progressBarSection: {
     padding: '2rem',
     borderRadius: '16px',
-    backgroundColor: 'rgba(17, 19, 28, 0.65)',
+    backgroundColor: 'var(--bg-card)',
     display: 'flex',
     flexDirection: 'column' as const,
     gap: '1.5rem',
@@ -728,7 +728,7 @@ const styles = {
     justifyContent: 'center',
     fontSize: '0.85rem',
     fontWeight: 'bold',
-    color: '#ffffff',
+    color: 'var(--text-main)',
     border: '1px solid rgba(255,255,255,0.1)',
   },
   statusLabel: {
@@ -753,7 +753,7 @@ const styles = {
   },
   transitionTitle: {
     fontSize: '0.85rem',
-    color: '#9ca3af',
+    color: 'var(--text-muted)',
     fontWeight: 500,
   },
   transitionButtons: {
@@ -764,8 +764,8 @@ const styles = {
   transitionBtn: {
     padding: '0.4rem 1rem',
     borderRadius: '6px',
-    backgroundColor: '#8b5cf6',
-    color: '#ffffff',
+    backgroundColor: 'var(--primary)',
+    color: 'var(--text-main)',
     fontWeight: 600,
     fontSize: '0.85rem',
     border: 'none',
@@ -774,8 +774,8 @@ const styles = {
   transitionBtnGreen: {
     padding: '0.4rem 1rem',
     borderRadius: '6px',
-    backgroundColor: '#a78bfa',
-    color: '#ffffff',
+    backgroundColor: 'var(--secondary)',
+    color: 'var(--text-main)',
     fontWeight: 600,
     fontSize: '0.85rem',
     border: 'none',
@@ -785,7 +785,7 @@ const styles = {
     padding: '0.4rem 1rem',
     borderRadius: '6px',
     backgroundColor: '#ec4899',
-    color: '#ffffff',
+    color: 'var(--text-main)',
     fontWeight: 600,
     fontSize: '0.85rem',
     border: 'none',
@@ -795,7 +795,7 @@ const styles = {
     padding: '0.4rem 1rem',
     borderRadius: '6px',
     backgroundColor: '#ef4444',
-    color: '#ffffff',
+    color: 'var(--text-main)',
     fontWeight: 600,
     fontSize: '0.85rem',
     border: 'none',
@@ -805,15 +805,15 @@ const styles = {
     padding: '0.4rem 1rem',
     borderRadius: '6px',
     backgroundColor: 'rgba(255, 255, 255, 0.04)',
-    color: '#d1d5db',
+    color: 'var(--text-main)',
     fontWeight: 500,
     fontSize: '0.85rem',
-    border: '1px solid rgba(255,255,255,0.08)',
+    border: '1px solid var(--border-color)',
     cursor: 'pointer',
   },
   savingText: {
     fontSize: '0.8rem',
-    color: '#9ca3af',
+    color: 'var(--text-muted)',
   },
   errorBox: {
     padding: '0.75rem 1rem',
@@ -844,8 +844,8 @@ const styles = {
     top: '80px',
   },
   detailsCard: {
-    backgroundColor: 'rgba(17, 19, 28, 0.65)',
-    border: '1px solid rgba(255, 255, 255, 0.07)',
+    backgroundColor: 'var(--bg-card)',
+    border: '1px solid var(--border-color)',
     borderRadius: '12px',
     padding: '2.5rem',
     display: 'flex',
@@ -855,7 +855,7 @@ const styles = {
   titleText: {
     fontSize: '1.75rem',
     fontWeight: 800,
-    color: '#ffffff',
+    color: 'var(--text-main)',
     lineHeight: '1.2',
   },
   metaRow: {
@@ -863,13 +863,13 @@ const styles = {
     alignItems: 'center',
     gap: '0.75rem',
     fontSize: '0.8rem',
-    color: '#6b7280',
+    color: 'var(--text-muted)',
   },
   metaItem: {
-    color: '#9ca3af',
+    color: 'var(--text-muted)',
   },
   metaDivider: {
-    color: '#374151',
+    color: 'var(--border-color)',
   },
   descBlock: {
     display: 'flex',
@@ -878,22 +878,22 @@ const styles = {
   },
   descBlockHeader: {
     fontSize: '0.8rem',
-    color: '#8b5cf6',
+    color: 'var(--primary)',
     textTransform: 'uppercase' as const,
     letterSpacing: '0.05em',
     fontWeight: 700,
   },
   descText: {
     fontSize: '0.95rem',
-    color: '#d1d5db',
+    color: 'var(--text-main)',
     lineHeight: '1.6',
     whiteSpace: 'pre-wrap' as const,
   },
   descTextCode: {
     fontSize: '0.9rem',
     fontFamily: 'var(--font-mono)',
-    color: '#e5e7eb',
-    backgroundColor: 'rgba(255,255,255,0.02)',
+    color: 'var(--text-main)',
+    backgroundColor: 'var(--bg-card-hover)',
     border: '1px solid rgba(255,255,255,0.04)',
     borderRadius: '8px',
     padding: '1rem',
@@ -909,8 +909,8 @@ const styles = {
     border: '1px dashed rgba(236,72,153,0.15)',
   },
   card: {
-    backgroundColor: 'rgba(17, 19, 28, 0.65)',
-    border: '1px solid rgba(255, 255, 255, 0.07)',
+    backgroundColor: 'var(--bg-card)',
+    border: '1px solid var(--border-color)',
     borderRadius: '12px',
     padding: '2rem',
     display: 'flex',
@@ -930,9 +930,9 @@ const styles = {
   uploadCtaBtn: {
     padding: '0.4rem 0.8rem',
     backgroundColor: 'rgba(255,255,255,0.03)',
-    border: '1px solid rgba(255,255,255,0.08)',
+    border: '1px solid var(--border-color)',
     borderRadius: '6px',
-    color: '#ffffff',
+    color: 'var(--text-main)',
     fontSize: '0.8rem',
     fontWeight: 500,
     cursor: 'pointer',
@@ -946,7 +946,7 @@ const styles = {
     fontSize: '100px',
   },
   emptyText: {
-    color: '#6b7280',
+    color: 'var(--text-muted)',
     fontSize: '0.9rem',
     textAlign: 'center' as const,
     padding: '1.5rem 0',
@@ -995,7 +995,7 @@ const styles = {
   },
   attachmentSize: {
     fontSize: '0.65rem',
-    color: '#6b7280',
+    color: 'var(--text-muted)',
   },
   timelineFeed: {
     display: 'flex',
@@ -1033,7 +1033,7 @@ const styles = {
   },
   activityText: {
     fontSize: '0.85rem',
-    color: '#9ca3af',
+    color: 'var(--text-muted)',
   },
   timelineDate: {
     fontSize: '0.75rem',
@@ -1049,8 +1049,8 @@ const styles = {
     width: '24px',
     height: '24px',
     borderRadius: '50%',
-    backgroundColor: '#8b5cf6',
-    color: '#ffffff',
+    backgroundColor: 'var(--primary)',
+    color: 'var(--text-main)',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -1060,7 +1060,7 @@ const styles = {
   },
   commentBubble: {
     flexGrow: 1,
-    backgroundColor: 'rgba(255,255,255,0.02)',
+    backgroundColor: 'var(--bg-card-hover)',
     border: '1px solid rgba(255,255,255,0.05)',
     borderRadius: '10px',
     padding: '1rem',
@@ -1074,24 +1074,24 @@ const styles = {
   commentAuthorName: {
     fontSize: '0.85rem',
     fontWeight: 600,
-    color: '#ffffff',
+    color: 'var(--text-main)',
   },
   commentAuthorRole: {
     fontSize: '0.65rem',
     padding: '0.1rem 0.4rem',
     backgroundColor: 'rgba(255,255,255,0.06)',
     borderRadius: '4px',
-    color: '#9ca3af',
+    color: 'var(--text-muted)',
     fontWeight: 500,
   },
   commentDate: {
     fontSize: '0.75rem',
-    color: '#6b7280',
+    color: 'var(--text-muted)',
     marginLeft: 'auto',
   },
   commentBody: {
     fontSize: '0.9rem',
-    color: '#d1d5db',
+    color: 'var(--text-main)',
     lineHeight: '1.5',
   },
   commentForm: {
@@ -1106,9 +1106,9 @@ const styles = {
     width: '100%',
     padding: '0.75rem 1rem',
     borderRadius: '8px',
-    backgroundColor: 'rgba(15, 17, 26, 0.8)',
-    border: '1px solid rgba(255, 255, 255, 0.08)',
-    color: '#ffffff',
+    backgroundColor: 'var(--bg-input)',
+    border: '1px solid var(--border-color)',
+    color: 'var(--text-main)',
     fontSize: '0.9rem',
     outline: 'none',
     resize: 'vertical' as const,
@@ -1117,16 +1117,16 @@ const styles = {
     alignSelf: 'flex-end',
     padding: '0.5rem 1.25rem',
     borderRadius: '6px',
-    backgroundColor: '#8b5cf6',
-    color: '#ffffff',
+    backgroundColor: 'var(--primary)',
+    color: 'var(--text-main)',
     fontWeight: 600,
     fontSize: '0.85rem',
     border: 'none',
     cursor: 'pointer',
   },
   metaCard: {
-    backgroundColor: 'rgba(17, 19, 28, 0.65)',
-    border: '1px solid rgba(255, 255, 255, 0.07)',
+    backgroundColor: 'var(--bg-card)',
+    border: '1px solid var(--border-color)',
     borderRadius: '12px',
     padding: '1.5rem',
     display: 'flex',
@@ -1140,16 +1140,16 @@ const styles = {
   },
   attributeLabel: {
     fontSize: '0.75rem',
-    color: '#6b7280',
+    color: 'var(--text-muted)',
     textTransform: 'uppercase' as const,
     fontWeight: 600,
   },
   attributeSelect: {
     padding: '0.5rem 0.75rem',
     borderRadius: '6px',
-    backgroundColor: 'rgba(15, 17, 26, 0.8)',
-    border: '1px solid rgba(255, 255, 255, 0.08)',
-    color: '#ffffff',
+    backgroundColor: 'var(--bg-input)',
+    border: '1px solid var(--border-color)',
+    color: 'var(--text-main)',
     fontSize: '0.85rem',
     outline: 'none',
   },
@@ -1175,7 +1175,7 @@ const styles = {
   },
   attributeValText: {
     fontSize: '0.9rem',
-    color: '#ffffff',
+    color: 'var(--text-main)',
   },
   slaBadge: {
     fontSize: '0.7rem',

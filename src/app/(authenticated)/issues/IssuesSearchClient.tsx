@@ -253,7 +253,7 @@ export default function IssuesSearchClient({
           {savedFilters.length === 0 ? (
             <div style={styles.emptySavedFiltersCard}>
               <span style={{ fontSize: '1.25rem', marginBottom: '0.25rem', display: 'block' }}>📁</span>
-              <p style={{ fontSize: '0.8rem', color: '#9ca3af' }}>No saved filters yet.</p>
+              <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>No saved filters yet.</p>
             </div>
           ) : (
             <ul style={styles.savedFiltersList}>
@@ -437,7 +437,7 @@ export default function IssuesSearchClient({
                           }
                         })()}
                       </td>
-                      <td style={styles.issueTdText}>{issue.assignee?.name || <span style={{ color: '#6b7280' }}>Unassigned</span>}</td>
+                      <td style={styles.issueTdText}>{issue.assignee?.name || <span style={{ color: 'var(--text-muted)' }}>Unassigned</span>}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -454,9 +454,9 @@ function getStatusColor(status: string) {
   switch (status) {
     case 'NEW': return '#3b82f6';
     case 'TRIAGED': return '#06b6d4';
-    case 'ASSIGNED': return '#8b5cf6';
+    case 'ASSIGNED': return 'var(--primary)';
     case 'IN_PROGRESS': return '#f59e0b';
-    case 'RESOLVED': return '#a78bfa';
+    case 'RESOLVED': return 'var(--secondary)';
     case 'VERIFICATION': return '#ec4899';
     default: return '#6b7280';
   }
@@ -467,7 +467,7 @@ function getSeverityStyle(sev: string) {
     case 'CRITICAL': return { backgroundColor: 'rgba(239, 68, 68, 0.15)', color: '#fca5a5' };
     case 'HIGH': return { backgroundColor: 'rgba(245, 158, 11, 0.15)', color: '#fbbf24' };
     case 'MEDIUM': return { backgroundColor: 'rgba(6, 182, 212, 0.15)', color: '#22d3ee' };
-    default: return { backgroundColor: 'rgba(156, 163, 175, 0.15)', color: '#9ca3af' };
+    default: return { backgroundColor: 'rgba(156, 163, 175, 0.15)', color: 'var(--text-muted)' };
   }
 }
 
@@ -484,8 +484,8 @@ const styles = {
     gap: '1.5rem',
   },
   sidebarCard: {
-    backgroundColor: 'rgba(17, 19, 28, 0.65)',
-    border: '1px solid rgba(255, 255, 255, 0.07)',
+    backgroundColor: 'var(--bg-card)',
+    border: '1px solid var(--border-color)',
     borderRadius: '12px',
     padding: '1.5rem',
     display: 'flex',
@@ -509,7 +509,7 @@ const styles = {
     display: 'flex',
     flexDirection: 'column' as const,
     gap: '0.5rem',
-    backgroundColor: 'rgba(255,255,255,0.02)',
+    backgroundColor: 'var(--bg-card-hover)',
     padding: '0.75rem',
     borderRadius: '8px',
     border: '1px solid rgba(255,255,255,0.05)',
@@ -520,7 +520,7 @@ const styles = {
     borderRadius: '4px',
     backgroundColor: '#090a0f',
     border: '1px solid rgba(255,255,255,0.1)',
-    color: '#ffffff',
+    color: 'var(--text-main)',
     fontSize: '0.8rem',
     
   },
@@ -531,8 +531,8 @@ const styles = {
   saveFilterSubmitBtn: {
     padding: '0.2rem 0.6rem',
     borderRadius: '4px',
-    backgroundColor: '#8b5cf6',
-    color: '#ffffff',
+    backgroundColor: 'var(--primary)',
+    color: 'var(--text-main)',
     fontSize: '0.75rem',
     fontWeight: 600,
     border: 'none',
@@ -542,7 +542,7 @@ const styles = {
     padding: '0.2rem 0.6rem',
     borderRadius: '4px',
     backgroundColor: 'transparent',
-    color: '#9ca3af',
+    color: 'var(--text-muted)',
     fontSize: '0.75rem',
     border: 'none',
     cursor: 'pointer',
@@ -560,7 +560,7 @@ const styles = {
   presetLink: {
     background: 'transparent',
     border: 'none',
-    color: '#9ca3af',
+    color: 'var(--text-muted)',
     fontSize: '0.85rem',
     textAlign: 'left' as const,
     cursor: 'pointer',
@@ -569,7 +569,7 @@ const styles = {
     transition: 'color 0.2s ease',
   },
   emptySavedFilters: {
-    color: '#6b7280',
+    color: 'var(--text-muted)',
     fontSize: '0.8rem',
   },
   savedFiltersList: {
@@ -588,7 +588,7 @@ const styles = {
     borderRadius: '6px',
     fontSize: '0.8rem',
     cursor: 'pointer',
-    color: '#d1d5db',
+    color: 'var(--text-main)',
     transition: 'all 0.2s ease',
   },
   deleteSavedFilterBtn: {
@@ -604,8 +604,8 @@ const styles = {
     gap: '1.25rem',
   },
   searchBarCard: {
-    backgroundColor: 'rgba(17, 19, 28, 0.65)',
-    border: '1px solid rgba(255, 255, 255, 0.07)',
+    backgroundColor: 'var(--bg-card)',
+    border: '1px solid var(--border-color)',
     borderRadius: '12px',
     padding: '1.25rem',
     display: 'flex',
@@ -620,9 +620,9 @@ const styles = {
     flexGrow: 1,
     padding: '0.6rem 1rem',
     borderRadius: '8px',
-    backgroundColor: 'rgba(15, 17, 26, 0.8)',
-    border: '1px solid rgba(255, 255, 255, 0.08)',
-    color: '#ffffff',
+    backgroundColor: 'var(--bg-input)',
+    border: '1px solid var(--border-color)',
+    color: 'var(--text-main)',
     fontSize: '0.9rem',
     
   },
@@ -644,25 +644,25 @@ const styles = {
   filterSelect: {
     padding: '0.45rem 0.6rem',
     borderRadius: '6px',
-    backgroundColor: 'rgba(15, 17, 26, 0.8)',
-    border: '1px solid rgba(255, 255, 255, 0.06)',
-    color: '#d1d5db',
+    backgroundColor: 'var(--bg-input)',
+    border: '1px solid var(--border-color)',
+    color: 'var(--text-main)',
     fontSize: '0.8rem',
     
   },
   resultsSummary: {
     fontSize: '0.8rem',
-    color: '#6b7280',
+    color: 'var(--text-muted)',
     paddingLeft: '0.25rem',
   },
   tableCard: {
-    backgroundColor: 'rgba(17, 19, 28, 0.65)',
-    border: '1px solid rgba(255, 255, 255, 0.07)',
+    backgroundColor: 'var(--bg-card)',
+    border: '1px solid var(--border-color)',
     borderRadius: '12px',
     padding: '1.5rem',
   },
   emptyResultsText: {
-    color: '#6b7280',
+    color: 'var(--text-muted)',
     textAlign: 'center' as const,
     padding: '3rem',
     fontSize: '0.9rem',
@@ -680,12 +680,12 @@ const styles = {
   },
   tableTh: {
     padding: '0.75rem 1rem',
-    color: '#9ca3af',
+    color: 'var(--text-muted)',
     fontWeight: 600,
     fontSize: '0.85rem',
   },
   tableRow: {
-    borderBottom: '1px solid rgba(255, 255, 255, 0.04)',
+    borderBottom: '1px solid var(--border-color)',
     transition: 'background-color 0.2s ease',
   },
   issueKeyTd: {
@@ -704,13 +704,13 @@ const styles = {
     whiteSpace: 'nowrap',
   },
   issueTitleLink: {
-    color: '#ffffff',
+    color: 'var(--text-main)',
     fontWeight: 500,
   },
   issueTdText: {
     padding: '1rem',
     fontSize: '0.85rem',
-    color: '#d1d5db',
+    color: 'var(--text-main)',
   },
   statusDot: {
     display: 'inline-block',
@@ -736,7 +736,7 @@ const styles = {
     justifyContent: 'center',
     padding: '1.5rem 1rem',
     borderRadius: '8px',
-    backgroundColor: 'rgba(255, 255, 255, 0.02)',
+    backgroundColor: 'var(--bg-card-hover)',
     border: '1px dashed rgba(255, 255, 255, 0.08)',
     textAlign: 'center' as const,
     marginTop: '0.5rem',

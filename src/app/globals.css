@@ -1,114 +1,114 @@
 :root {
-  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --font-sans: var(--font-ibm-plex-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-space: var(--font-space-grotesk), sans-serif;
 
   /* Legacy theme palette for CSS Modules */
-  --color-bg: #ffffff;
-  --color-bg-light: #f8fafc;
-  --color-primary: #8b5cf6;
-  --color-primary-light: rgba(139, 92, 246, 0.08);
-  --color-text: #0f172a;
-  --color-muted: #64748b;
-  --color-border: rgba(15, 23, 42, 0.08);
+  --color-bg: #252321;
+  --color-bg-light: #2d2a28;
+  --color-primary: #D97B4A;
+  --color-primary-light: rgba(217, 123, 74, 0.08);
+  --color-text: #f4f3f2;
+  --color-muted: #a39f9c;
+  --color-border: #3A3735;
   --color-card-bg: var(--color-bg);
 
   /* Colors */
-  --bg-main: #f1f5f9;
-  --bg-card: #ffffff;
-  --bg-card-hover: #f8fafc;
-  --bg-sidebar: #f8fafc;
-  --bg-input: #ffffff;
+  --bg-main: #1C1B1A;
+  --bg-card: #252321;
+  --bg-card-hover: #2f2c29;
+  --bg-sidebar: #161514;
+  --bg-input: #1C1B1A;
   
-  --border-color: rgba(15, 23, 42, 0.08);
-  --border-color-hover: rgba(15, 23, 42, 0.15);
-  --border-glow: rgba(139, 92, 246, 0.1);
+  --border-color: #3A3735;
+  --border-color-hover: #504d4a;
+  --border-glow: rgba(217, 123, 74, 0.04);
 
-  --text-main: #0f172a;
-  --text-muted: #64748b;
-  --text-inverse: #ffffff;
+  --text-main: #f4f3f2;
+  --text-muted: #a39f9c;
+  --text-inverse: #1C1B1A;
 
   /* Accent Colors */
-  --primary: #8b5cf6;         /* Violet */
-  --primary-hover: #7c3aed;
-  --primary-glow: rgba(139, 92, 246, 0.2);
+  --primary: #D97B4A;         /* Terracotta */
+  --primary-hover: #c26537;
+  --primary-glow: rgba(217, 123, 74, 0.15);
 
-  --secondary: #a78bfa;       /* Light Violet */
-  --secondary-glow: rgba(167, 139, 250, 0.15);
+  --secondary: #2A6F6F;       /* Deep Teal */
+  --secondary-glow: rgba(42, 111, 111, 0.15);
 
-  --success: #10b981;         /* Emerald */
-  --success-glow: rgba(16, 185, 129, 0.15);
+  --success: #3f9f7f;         /* Desaturated Emerald */
+  --success-glow: rgba(63, 159, 127, 0.08);
 
-  --warning: #f59e0b;         /* Amber */
-  --warning-glow: rgba(245, 158, 11, 0.15);
+  --warning: #d99738;         /* Desaturated Amber */
+  --warning-glow: rgba(217, 151, 56, 0.08);
 
-  --danger: #ef4444;          /* Red */
-  --danger-glow: rgba(239, 68, 68, 0.15);
+  --danger: #d35a5a;          /* Desaturated Red */
+  --danger-glow: rgba(211, 90, 90, 0.08);
   
-  --info: #0ea5e9;            /* Sky Blue */
+  --info: #3f96b5;            /* Desaturated Sky Blue */
 
   /* Severity / Priority Tags */
-  --tag-low: rgba(100, 116, 139, 0.08);
-  --tag-low-text: #64748b;
-  --tag-medium: rgba(14, 165, 233, 0.08);
-  --tag-medium-text: #0284c7;
-  --tag-high: rgba(245, 158, 11, 0.08);
-  --tag-high-text: #d97706;
-  --tag-critical: rgba(239, 68, 68, 0.08);
-  --tag-critical-text: #dc2626;
+  --tag-low: rgba(163, 159, 156, 0.08);
+  --tag-low-text: #a39f9c;
+  --tag-medium: rgba(63, 150, 181, 0.08);
+  --tag-medium-text: #59b5d3;
+  --tag-high: rgba(217, 151, 56, 0.08);
+  --tag-high-text: #e5a74e;
+  --tag-critical: rgba(211, 90, 90, 0.12);
+  --tag-critical-text: #e28080;
 
   /* Status Colors */
-  --status-new: #0ea5e9;      /* Sky Blue */
-  --status-triaged: #8b5cf6;  /* Violet */
-  --status-assigned: #8b5cf6; /* Violet */
-  --status-progress: #f59e0b; /* Amber */
-  --status-resolved: #10b981; /* Emerald */
-  --status-verify: #db2777;   /* Pink */
-  --status-closed: #64748b;   /* Slate Gray */
+  --status-new: #3f96b5;      /* Desaturated Sky Blue */
+  --status-triaged: #2A6F6F;  /* Deep Teal */
+  --status-assigned: #8063b8; /* Desaturated Indigo */
+  --status-progress: #d99738; /* Desaturated Amber */
+  --status-resolved: #3f9f7f; /* Desaturated Emerald */
+  --status-verify: #cc6b93;   /* Desaturated Pink */
+  --status-closed: #5c5855;   /* Warm Slate Gray */
 
   /* Theme Layout values */
-  --radius-sm: 6px;
-  --radius-md: 12px;
-  --radius-lg: 18px;
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.02);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.03), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.02);
-  --shadow-glow: 0 0 30px rgba(139, 92, 246, 0.05);
-  --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-  --blur: blur(12px);
+  --radius-sm: 4px;           /* Slightly less rounded for a custom human build look */
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.15), 0 2px 4px -1px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.25), 0 4px 6px -2px rgba(0, 0, 0, 0.1);
+  --shadow-glow: none;        /* Removed the glow shadows to look more custom-built */
+  --transition: all 0.2s ease-out;
+  --blur: none;               /* Removed blur to avoid standard AI template look */
 }
 
 :root.dark, .dark {
-  --color-bg: #0f0b1e;
-  --color-bg-light: #16102b;
-  --color-primary: #a78bfa;
-  --color-primary-light: rgba(167, 139, 250, 0.1);
-  --color-text: #f3f4f6;
-  --color-muted: #9ca3af;
-  --color-border: rgba(255, 255, 255, 0.08);
+  --color-bg: #252321;
+  --color-bg-light: #2d2a28;
+  --color-primary: #D97B4A;
+  --color-primary-light: rgba(217, 123, 74, 0.08);
+  --color-text: #f4f3f2;
+  --color-muted: #a39f9c;
+  --color-border: #3A3735;
   --color-card-bg: var(--color-bg);
 
-  --bg-main: #0c0817;
-  --bg-card: rgba(22, 16, 43, 0.65);
-  --bg-card-hover: rgba(30, 22, 59, 0.85);
-  --bg-sidebar: #0f0b1e;
-  --bg-input: rgba(15, 11, 30, 0.8);
+  --bg-main: #1C1B1A;
+  --bg-card: #252321;
+  --bg-card-hover: #2f2c29;
+  --bg-sidebar: #161514;
+  --bg-input: #1C1B1A;
   
-  --border-color: rgba(255, 255, 255, 0.07);
-  --border-color-hover: rgba(255, 255, 255, 0.15);
-  --border-glow: rgba(167, 139, 250, 0.15);
+  --border-color: #3A3735;
+  --border-color-hover: #504d4a;
+  --border-glow: rgba(217, 123, 74, 0.04);
 
-  --text-main: #f3f4f6;
-  --text-muted: #9ca3af;
-  --text-inverse: #0c0817;
+  --text-main: #f4f3f2;
+  --text-muted: #a39f9c;
+  --text-inverse: #1C1B1A;
 
-  --primary: #8b5cf6;
-  --primary-hover: #7c3aed;
-  --primary-glow: rgba(139, 92, 246, 0.35);
+  --primary: #D97B4A;
+  --primary-hover: #c26537;
+  --primary-glow: rgba(217, 123, 74, 0.15);
 
-  --secondary: #a78bfa;
-  --secondary-glow: rgba(167, 139, 250, 0.25);
+  --secondary: #2A6F6F;
+  --secondary-glow: rgba(42, 111, 111, 0.15);
   
-  --shadow-glow: 0 0 30px rgba(167, 139, 250, 0.15);
+  --shadow-glow: none;
 }
 
 /* Base Styles */
@@ -120,14 +120,15 @@
 
 body {
   font-family: var(--font-sans);
+  font-size: 15px;
   background-color: var(--bg-main);
   color: var(--text-main);
   min-height: 100vh;
   overflow-x: hidden;
-  line-height: 1.5;
+  line-height: 1.55;
   background-image: 
-    radial-gradient(at 0% 0%, rgba(139, 92, 246, 0.08) 0px, transparent 50%),
-    radial-gradient(at 100% 100%, rgba(167, 139, 250, 0.05) 0px, transparent 50%);
+    radial-gradient(at 0% 0%, rgba(217, 123, 74, 0.04) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(42, 111, 111, 0.04) 0px, transparent 50%);
   background-attachment: fixed;
 }
 
@@ -179,15 +180,16 @@ a {
 
 /* Typography styles */
 h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-space);
   font-weight: 700;
-  letter-spacing: -0.025em;
+  letter-spacing: -0.02em;
   color: var(--text-main);
   margin-bottom: 0.5rem;
 }
 
 /* Global loading skeletons */
 .skeleton {
-  background: linear-gradient(90deg, rgba(15, 23, 42, 0.05) 25%, rgba(15, 23, 42, 0.1) 50%, rgba(15, 23, 42, 0.05) 75%);
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.02) 25%, rgba(255, 255, 255, 0.06) 50%, rgba(255, 255, 255, 0.02) 75%);
   background-size: 200% 100%;
   animation: loading 1.5s infinite;
   border-radius: 4px;

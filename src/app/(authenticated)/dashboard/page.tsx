@@ -399,9 +399,9 @@ function IssueTable({ issues }: { issues: any[] }) {
     switch (status) {
       case 'NEW': return '#3b82f6';
       case 'TRIAGED': return '#06b6d4';
-      case 'ASSIGNED': return '#8b5cf6';
+      case 'ASSIGNED': return 'var(--primary)';
       case 'IN_PROGRESS': return '#f59e0b';
-      case 'RESOLVED': return '#a78bfa';
+      case 'RESOLVED': return 'var(--secondary)';
       case 'VERIFICATION': return '#ec4899';
       default: return '#6b7280';
     }
@@ -412,7 +412,7 @@ function IssueTable({ issues }: { issues: any[] }) {
       case 'CRITICAL': return { backgroundColor: 'rgba(239, 68, 68, 0.15)', color: '#fca5a5' };
       case 'HIGH': return { backgroundColor: 'rgba(245, 158, 11, 0.15)', color: '#fbbf24' };
       case 'MEDIUM': return { backgroundColor: 'rgba(6, 182, 212, 0.15)', color: '#22d3ee' };
-      default: return { backgroundColor: 'rgba(156, 163, 175, 0.15)', color: '#9ca3af' };
+      default: return { backgroundColor: 'rgba(156, 163, 175, 0.15)', color: 'var(--text-muted)' };
     }
   };
 
@@ -500,8 +500,8 @@ const styles = {
     gap: '1.5rem',
   },
   analyticsCard: {
-    backgroundColor: 'rgba(17, 19, 28, 0.65)',
-    border: '1px solid rgba(255, 255, 255, 0.07)',
+    backgroundColor: 'var(--bg-card)',
+    border: '1px solid var(--border-color)',
     borderRadius: '12px',
     padding: '1.5rem',
     display: 'flex',
@@ -518,7 +518,7 @@ const styles = {
     flexDirection: 'column' as const,
     alignItems: 'center',
     gap: '0.4rem',
-    backgroundColor: 'rgba(255,255,255,0.02)',
+    backgroundColor: 'var(--bg-card-hover)',
     padding: '0.75rem',
     borderRadius: '8px',
     border: '1px solid rgba(255,255,255,0.04)',
@@ -533,7 +533,7 @@ const styles = {
   agingVal: {
     fontSize: '1.5rem',
     fontWeight: 700,
-    color: '#ffffff',
+    color: 'var(--text-main)',
   },
   statBreakdownGrid: {
     display: 'grid',
@@ -554,12 +554,12 @@ const styles = {
   },
   breakdownLabel: {
     fontSize: '0.75rem',
-    color: '#9ca3af',
+    color: 'var(--text-muted)',
   },
   breakdownVal: {
     fontSize: '0.85rem',
     fontWeight: 700,
-    color: '#ffffff',
+    color: 'var(--text-main)',
   },
   dashboardSection: {
     marginTop: '1rem',
@@ -589,12 +589,12 @@ const styles = {
   metricVal: {
     fontSize: '1.5rem',
     fontWeight: 700,
-    color: '#ffffff',
+    color: 'var(--text-main)',
     lineHeight: 1.1,
   },
   metricLabel: {
     fontSize: '0.8rem',
-    color: '#9ca3af',
+    color: 'var(--text-muted)',
   },
   sectionHeader: {
     display: 'flex',
@@ -607,8 +607,8 @@ const styles = {
     fontWeight: 500,
   },
   card: {
-    backgroundColor: 'rgba(17, 19, 28, 0.65)',
-    border: '1px solid rgba(255, 255, 255, 0.07)',
+    backgroundColor: 'var(--bg-card)',
+    border: '1px solid var(--border-color)',
     borderRadius: '12px',
     padding: '2rem',
     display: 'flex',
@@ -616,7 +616,7 @@ const styles = {
     gap: '1rem',
   },
   emptyText: {
-    color: '#6b7280',
+    color: 'var(--text-muted)',
     fontSize: '0.95rem',
     textAlign: 'center' as const,
     padding: '2rem',
@@ -634,12 +634,12 @@ const styles = {
   },
   tableTh: {
     padding: '0.75rem 1rem',
-    color: '#9ca3af',
+    color: 'var(--text-muted)',
     fontWeight: 600,
     fontSize: '0.85rem',
   },
   tableRow: {
-    borderBottom: '1px solid rgba(255, 255, 255, 0.04)',
+    borderBottom: '1px solid var(--border-color)',
   },
   tableTdKey: {
     padding: '1rem',
@@ -657,7 +657,7 @@ const styles = {
     fontWeight: 600,
   },
   issueLinkText: {
-    color: '#ffffff',
+    color: 'var(--text-main)',
     fontWeight: 500,
   },
   tableTd: {
@@ -673,7 +673,7 @@ const styles = {
   },
   statusLabel: {
     fontSize: '0.85rem',
-    color: '#d1d5db',
+    color: 'var(--text-main)',
   },
   severityBadge: {
     fontSize: '0.75rem',
@@ -685,12 +685,12 @@ const styles = {
   tableTdOwner: {
     padding: '1rem',
     fontSize: '0.9rem',
-    color: '#d1d5db',
+    color: 'var(--text-main)',
   },
   tableTdDate: {
     padding: '1rem',
     fontSize: '0.85rem',
-    color: '#6b7280',
+    color: 'var(--text-muted)',
   },
   slaBadge: {
     fontSize: '0.7rem',

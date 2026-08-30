@@ -161,7 +161,7 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
                           </span>
                         </td>
                         <td style={styles.issueAssigneeTd}>
-                          {issue.assignee?.name || <span style={{ color: '#6b7280' }}>Unassigned</span>}
+                          {issue.assignee?.name || <span style={{ color: 'var(--text-muted)' }}>Unassigned</span>}
                         </td>
                       </tr>
                     ))}
@@ -187,9 +187,9 @@ function getStatusColor(status: string) {
   switch (status) {
     case 'NEW': return '#3b82f6';
     case 'TRIAGED': return '#06b6d4';
-    case 'ASSIGNED': return '#8b5cf6';
+    case 'ASSIGNED': return 'var(--primary)';
     case 'IN_PROGRESS': return '#f59e0b';
-    case 'RESOLVED': return '#a78bfa';
+    case 'RESOLVED': return 'var(--secondary)';
     case 'VERIFICATION': return '#ec4899';
     default: return '#6b7280';
   }
@@ -200,7 +200,7 @@ function getSeverityStyle(sev: string) {
     case 'CRITICAL': return { backgroundColor: 'rgba(239, 68, 68, 0.15)', color: '#fca5a5' };
     case 'HIGH': return { backgroundColor: 'rgba(245, 158, 11, 0.15)', color: '#fbbf24' };
     case 'MEDIUM': return { backgroundColor: 'rgba(6, 182, 212, 0.15)', color: '#22d3ee' };
-    default: return { backgroundColor: 'rgba(156, 163, 175, 0.15)', color: '#9ca3af' };
+    default: return { backgroundColor: 'rgba(156, 163, 175, 0.15)', color: 'var(--text-muted)' };
   }
 }
 
@@ -215,7 +215,7 @@ const styles = {
     alignItems: 'center',
     gap: '0.5rem',
     fontSize: '0.85rem',
-    color: '#9ca3af',
+    color: 'var(--text-muted)',
   },
   breadcrumbLink: {
     color: '#818cf8',
@@ -224,12 +224,12 @@ const styles = {
     color: '#4b5563',
   },
   breadcrumbActive: {
-    color: '#ffffff',
+    color: 'var(--text-main)',
     fontWeight: 500,
   },
   banner: {
-    backgroundColor: 'rgba(17, 19, 28, 0.65)',
-    border: '1px solid rgba(255, 255, 255, 0.07)',
+    backgroundColor: 'var(--bg-card)',
+    border: '1px solid var(--border-color)',
     borderRadius: '16px',
     padding: '2.5rem',
     display: 'flex',
@@ -243,7 +243,7 @@ const styles = {
     gap: '1rem',
   },
   keyBadge: {
-    backgroundColor: 'rgba(139, 92, 246, 0.15)',
+    backgroundColor: 'var(--primary-glow)',
     color: '#a5b4fc',
     fontSize: '0.9rem',
     fontWeight: 700,
@@ -258,7 +258,7 @@ const styles = {
     margin: 0,
   },
   bannerDesc: {
-    color: '#9ca3af',
+    color: 'var(--text-muted)',
     fontSize: '1rem',
     lineHeight: '1.6',
     maxWidth: '850px',
@@ -268,14 +268,14 @@ const styles = {
     alignItems: 'center',
     gap: '1rem',
     fontSize: '0.8rem',
-    color: '#6b7280',
+    color: 'var(--text-muted)',
     marginTop: '0.5rem',
   },
   metaItem: {
-    color: '#9ca3af',
+    color: 'var(--text-muted)',
   },
   metaDivider: {
-    color: '#374151',
+    color: 'var(--border-color)',
   },
   layoutGrid: {
     display: 'grid',
@@ -293,8 +293,8 @@ const styles = {
     top: '80px',
   },
   card: {
-    backgroundColor: 'rgba(17, 19, 28, 0.65)',
-    border: '1px solid rgba(255, 255, 255, 0.07)',
+    backgroundColor: 'var(--bg-card)',
+    border: '1px solid var(--border-color)',
     borderRadius: '12px',
     padding: '2rem',
     display: 'flex',
@@ -317,7 +317,7 @@ const styles = {
     transition: 'all 0.2s ease',
   },
   emptyText: {
-    color: '#6b7280',
+    color: 'var(--text-muted)',
     fontSize: '0.9rem',
     textAlign: 'center' as const,
     padding: '1.5rem',
@@ -335,29 +335,29 @@ const styles = {
   },
   tableTh: {
     padding: '0.75rem 1rem',
-    color: '#9ca3af',
+    color: 'var(--text-muted)',
     fontWeight: 600,
     fontSize: '0.85rem',
   },
   tableRow: {
-    borderBottom: '1px solid rgba(255, 255, 255, 0.04)',
+    borderBottom: '1px solid var(--border-color)',
     transition: 'background-color 0.2s ease',
   },
   compNameTd: {
     padding: '1rem',
-    color: '#ffffff',
+    color: 'var(--text-main)',
     fontWeight: 600,
     fontSize: '0.9rem',
   },
   compDescTd: {
     padding: '1rem',
-    color: '#9ca3af',
+    color: 'var(--text-muted)',
     fontSize: '0.85rem',
   },
   compIssuesCountTd: {
     padding: '1rem',
     textAlign: 'center' as const,
-    color: '#ffffff',
+    color: 'var(--text-main)',
     fontWeight: 700,
     fontSize: '0.9rem',
   },
@@ -377,18 +377,18 @@ const styles = {
     whiteSpace: 'nowrap',
   },
   issueTitleLink: {
-    color: '#ffffff',
+    color: 'var(--text-main)',
     fontWeight: 500,
   },
   issueCompTd: {
     padding: '1rem',
     fontSize: '0.85rem',
-    color: '#d1d5db',
+    color: 'var(--text-main)',
   },
   issueStatusTd: {
     padding: '1rem',
     fontSize: '0.85rem',
-    color: '#d1d5db',
+    color: 'var(--text-main)',
     display: 'flex',
     alignItems: 'center',
   },
@@ -409,7 +409,7 @@ const styles = {
   issueAssigneeTd: {
     padding: '1rem',
     fontSize: '0.85rem',
-    color: '#d1d5db',
+    color: 'var(--text-main)',
   },
   issueTd: {
     padding: '1rem',
@@ -421,7 +421,7 @@ const styles = {
     justifyContent: 'center',
     padding: '3rem 1.5rem',
     borderRadius: '8px',
-    backgroundColor: 'rgba(255, 255, 255, 0.02)',
+    backgroundColor: 'var(--bg-card-hover)',
     border: '1px dashed rgba(255, 255, 255, 0.08)',
     textAlign: 'center' as const,
   },
@@ -432,12 +432,12 @@ const styles = {
   emptyCardTitle: {
     fontSize: '1.1rem',
     fontWeight: 600,
-    color: '#ffffff',
+    color: 'var(--text-main)',
     marginBottom: '0.25rem',
   },
   emptyCardSub: {
     fontSize: '0.85rem',
-    color: '#9ca3af',
+    color: 'var(--text-muted)',
     maxWidth: '300px',
   },
 };

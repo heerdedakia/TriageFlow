@@ -99,7 +99,7 @@ const styles = {
   },
   subtitle: {
     fontSize: '0.95rem',
-    color: '#9ca3af',
+    color: 'var(--text-muted)',
   },
   layoutGrid: {
     display: 'grid',
@@ -120,8 +120,8 @@ const styles = {
     gap: '1.5rem',
   },
   projectCard: {
-    backgroundColor: 'rgba(17, 19, 28, 0.65)',
-    border: '1px solid rgba(255, 255, 255, 0.07)',
+    backgroundColor: 'var(--bg-card)',
+    border: '1px solid var(--border-color)',
     borderRadius: '12px',
     padding: '1.5rem',
     display: 'flex',
@@ -136,7 +136,7 @@ const styles = {
     gap: '0.75rem',
   },
   keyBadge: {
-    backgroundColor: 'rgba(139, 92, 246, 0.15)',
+    backgroundColor: 'var(--primary-glow)',
     color: '#a5b4fc',
     fontSize: '0.75rem',
     fontWeight: 700,
@@ -151,11 +151,11 @@ const styles = {
     margin: 0,
   },
   projectLink: {
-    color: '#ffffff',
+    color: 'var(--text-main)',
   },
   description: {
     fontSize: '0.85rem',
-    color: '#9ca3af',
+    color: 'var(--text-muted)',
     lineHeight: '1.5',
     minHeight: '40px',
   },
@@ -169,7 +169,7 @@ const styles = {
   },
   leadInfo: {
     fontSize: '0.8rem',
-    color: '#d1d5db',
+    color: 'var(--text-main)',
   },
   statsGroup: {
     display: 'flex',
@@ -177,7 +177,7 @@ const styles = {
   },
   statTag: {
     fontSize: '0.75rem',
-    color: '#9ca3af',
+    color: 'var(--text-muted)',
     backgroundColor: 'rgba(255, 255, 255, 0.03)',
     border: '1px solid rgba(255, 255, 255, 0.05)',
     padding: '0.15rem 0.4rem',
@@ -191,6 +191,6 @@ const styles = {
     textAlign: 'center' as const,
   },
   emptyText: {
-    color: '#6b7280',
+    color: 'var(--text-muted)',
   },
 };

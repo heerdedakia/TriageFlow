@@ -65,7 +65,7 @@ const styles = {
   },
   subtitle: {
     fontSize: '0.95rem',
-    color: '#9ca3af',
+    color: 'var(--text-muted)',
   },
   formContainer: {
     // adapts based on styling

@@ -50,7 +50,7 @@ export default function AdminPanelClient({
       case 'ADMIN': return { backgroundColor: 'rgba(239, 68, 68, 0.15)', color: '#fca5a5' };
       case 'PROJECT_MANAGER': return { backgroundColor: 'rgba(245, 158, 11, 0.15)', color: '#fbbf24' };
       case 'QA': return { backgroundColor: 'rgba(236, 72, 153, 0.15)', color: '#fbcfe8' };
-      case 'DEVELOPER': return { backgroundColor: 'rgba(139, 92, 246, 0.15)', color: '#ddd6fe' };
+      case 'DEVELOPER': return { backgroundColor: 'var(--primary-glow)', color: '#ddd6fe' };
       default: return { backgroundColor: 'rgba(59, 130, 246, 0.15)', color: '#bfdbfe' };
     }
   };
@@ -134,8 +134,8 @@ const styles = {
     fontSize: '0.9rem',
   },
   tableCard: {
-    backgroundColor: 'rgba(17, 19, 28, 0.65)',
-    border: '1px solid rgba(255, 255, 255, 0.07)',
+    backgroundColor: 'var(--bg-card)',
+    border: '1px solid var(--border-color)',
     borderRadius: '12px',
     padding: '1.5rem',
   },
@@ -152,28 +152,28 @@ const styles = {
   },
   tableTh: {
     padding: '0.75rem 1rem',
-    color: '#9ca3af',
+    color: 'var(--text-muted)',
     fontWeight: 600,
     fontSize: '0.85rem',
   },
   tableRow: {
-    borderBottom: '1px solid rgba(255, 255, 255, 0.04)',
+    borderBottom: '1px solid var(--border-color)',
   },
   tableTdName: {
     padding: '1rem',
-    color: '#ffffff',
+    color: 'var(--text-main)',
     fontWeight: 600,
     fontSize: '0.9rem',
   },
   selfBadge: {
     fontSize: '0.75rem',
-    color: '#6b7280',
+    color: 'var(--text-muted)',
     fontWeight: 400,
     marginLeft: '0.25rem',
   },
   tableTdEmail: {
     padding: '1rem',
-    color: '#9ca3af',
+    color: 'var(--text-muted)',
     fontSize: '0.85rem',
   },
   tableTd: {
@@ -189,15 +189,15 @@ const styles = {
   roleSelect: {
     padding: '0.35rem 0.5rem',
     borderRadius: '6px',
-    backgroundColor: 'rgba(15, 17, 26, 0.8)',
-    border: '1px solid rgba(255, 255, 255, 0.08)',
-    color: '#ffffff',
+    backgroundColor: 'var(--bg-input)',
+    border: '1px solid var(--border-color)',
+    color: 'var(--text-main)',
     fontSize: '0.8rem',
     outline: 'none',
   },
   loadingText: {
     marginLeft: '0.5rem',
     fontSize: '0.75rem',
-    color: '#8b5cf6',
+    color: 'var(--primary)',
   },
 };

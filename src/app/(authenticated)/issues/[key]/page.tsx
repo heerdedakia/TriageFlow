@@ -98,7 +98,7 @@ const styles = {
     alignItems: 'center',
     gap: '0.5rem',
     fontSize: '0.85rem',
-    color: '#9ca3af',
+    color: 'var(--text-muted)',
   },
   breadcrumbLink: {
     color: '#818cf8',
@@ -107,7 +107,7 @@ const styles = {
     color: '#4b5563',
   },
   breadcrumbActive: {
-    color: '#ffffff',
+    color: 'var(--text-main)',
     fontWeight: 500,
   },
 };

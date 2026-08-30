@@ -220,9 +220,9 @@ export default function GuidedReportClient({ projects, initialProjectId, createI
                 style={{
                   ...styles.stepCircle,
                   backgroundColor: isActive
-                    ? '#8b5cf6'
+                    ? 'var(--primary)'
                     : isCompleted
-                    ? '#a78bfa'
+                    ? 'var(--secondary)'
                     : 'rgba(255,255,255,0.05)',
                   border: isActive
                     ? '2px solid rgba(139, 92, 246, 0.4)'
@@ -387,9 +387,9 @@ export default function GuidedReportClient({ projects, initialProjectId, createI
               onDrop={handleDrop}
               style={{
                 ...styles.dropzone,
-                borderColor: dragging || fileInputFocused ? '#8b5cf6' : 'rgba(255,255,255,0.08)',
+                borderColor: dragging || fileInputFocused ? 'var(--primary)' : 'rgba(255,255,255,0.08)',
                 backgroundColor: dragging || fileInputFocused ? 'rgba(139, 92, 246,0.03)' : 'rgba(255,255,255,0.01)',
-                outline: fileInputFocused ? '2px dashed #8b5cf6' : 'none',
+                outline: fileInputFocused ? '2px dashed var(--primary)' : 'none',
               }}
             >
               <div style={styles.dropzoneContent}>
@@ -604,8 +604,8 @@ const styles = {
     fontSize: '0.75rem',
   },
   formCard: {
-    backgroundColor: 'rgba(17, 19, 28, 0.65)',
-    border: '1px solid rgba(255, 255, 255, 0.07)',
+    backgroundColor: 'var(--bg-card)',
+    border: '1px solid var(--border-color)',
     borderRadius: '16px',
     padding: '2.5rem',
     display: 'flex',
@@ -619,7 +619,7 @@ const styles = {
   },
   stepDesc: {
     fontSize: '0.9rem',
-    color: '#9ca3af',
+    color: 'var(--text-muted)',
     marginTop: '-1rem',
     marginBottom: '0.5rem',
   },
@@ -637,23 +637,23 @@ const styles = {
   label: {
     fontSize: '0.85rem',
     fontWeight: 500,
-    color: '#9ca3af',
+    color: 'var(--text-muted)',
   },
   input: {
     padding: '0.75rem 1rem',
     borderRadius: '8px',
-    backgroundColor: 'rgba(15, 17, 26, 0.8)',
-    border: '1px solid rgba(255, 255, 255, 0.08)',
-    color: '#ffffff',
+    backgroundColor: 'var(--bg-input)',
+    border: '1px solid var(--border-color)',
+    color: 'var(--text-main)',
     fontSize: '0.95rem',
     
   },
   textarea: {
     padding: '0.75rem 1rem',
     borderRadius: '8px',
-    backgroundColor: 'rgba(15, 17, 26, 0.8)',
-    border: '1px solid rgba(255, 255, 255, 0.08)',
-    color: '#ffffff',
+    backgroundColor: 'var(--bg-input)',
+    border: '1px solid var(--border-color)',
+    color: 'var(--text-main)',
     fontSize: '0.95rem',
     
     resize: 'vertical' as const,
@@ -661,9 +661,9 @@ const styles = {
   select: {
     padding: '0.75rem 1rem',
     borderRadius: '8px',
-    backgroundColor: 'rgba(15, 17, 26, 0.8)',
-    border: '1px solid rgba(255, 255, 255, 0.08)',
-    color: '#ffffff',
+    backgroundColor: 'var(--bg-input)',
+    border: '1px solid var(--border-color)',
+    color: 'var(--text-main)',
     fontSize: '0.95rem',
     
   },
@@ -684,16 +684,16 @@ const styles = {
   },
   uploadIcon: {
     fontSize: '2.2rem',
-    color: '#6b7280',
+    color: 'var(--text-muted)',
   },
   uploadTitle: {
     fontSize: '0.95rem',
-    color: '#d1d5db',
+    color: 'var(--text-main)',
     fontWeight: 500,
   },
   uploadLimit: {
     fontSize: '0.75rem',
-    color: '#6b7280',
+    color: 'var(--text-muted)',
   },
   fileInput: {
     position: 'absolute' as const,
@@ -710,7 +710,7 @@ const styles = {
     gap: '0.75rem',
     padding: '0.75rem 1rem',
     backgroundColor: 'rgba(139, 92, 246, 0.05)',
-    border: '1px solid rgba(139, 92, 246, 0.15)',
+    border: '1px solid var(--primary-glow)',
     borderRadius: '8px',
   },
   fileDetailsIcon: {
@@ -719,11 +719,11 @@ const styles = {
   fileName: {
     fontSize: '0.85rem',
     fontWeight: 600,
-    color: '#ffffff',
+    color: 'var(--text-main)',
   },
   fileSize: {
     fontSize: '0.75rem',
-    color: '#9ca3af',
+    color: 'var(--text-muted)',
   },
   removeFileBtn: {
     marginLeft: 'auto',
@@ -749,7 +749,7 @@ const styles = {
   },
   reviewLabel: {
     fontSize: '0.75rem',
-    color: '#6b7280',
+    color: 'var(--text-muted)',
     textTransform: 'uppercase' as const,
     fontWeight: 600,
     letterSpacing: '0.02em',
@@ -757,17 +757,17 @@ const styles = {
   reviewTextValTitle: {
     fontSize: '1.1rem',
     fontWeight: 700,
-    color: '#ffffff',
+    color: 'var(--text-main)',
   },
   reviewTextValBlock: {
     fontSize: '0.9rem',
-    color: '#d1d5db',
+    color: 'var(--text-main)',
     lineHeight: '1.5',
     whiteSpace: 'pre-wrap' as const,
   },
   reviewTextVal: {
     fontSize: '0.9rem',
-    color: '#ffffff',
+    color: 'var(--text-main)',
   },
   actionsPanel: {
     display: 'flex',
@@ -780,8 +780,8 @@ const styles = {
     padding: '0.6rem 1.25rem',
     borderRadius: '8px',
     backgroundColor: 'rgba(255,255,255,0.04)',
-    border: '1px solid rgba(255,255,255,0.08)',
-    color: '#d1d5db',
+    border: '1px solid var(--border-color)',
+    color: 'var(--text-main)',
     fontWeight: 500,
     fontSize: '0.9rem',
     cursor: 'pointer',
@@ -789,8 +789,8 @@ const styles = {
   nextBtn: {
     padding: '0.6rem 1.5rem',
     borderRadius: '8px',
-    backgroundColor: '#8b5cf6',
-    color: '#ffffff',
+    backgroundColor: 'var(--primary)',
+    color: 'var(--text-main)',
     border: 'none',
     fontWeight: 600,
     fontSize: '0.9rem',
@@ -800,8 +800,8 @@ const styles = {
   submitBtn: {
     padding: '0.6rem 1.5rem',
     borderRadius: '8px',
-    backgroundColor: '#a78bfa',
-    color: '#ffffff',
+    backgroundColor: 'var(--secondary)',
+    color: 'var(--text-main)',
     border: 'none',
     fontWeight: 600,
     fontSize: '0.9rem',

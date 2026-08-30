@@ -32,7 +32,7 @@ export default function HeaderNav({ user, notifications: initialNotifications }:
       case 'ADMIN': return { backgroundColor: 'rgba(239, 68, 68, 0.15)', color: '#fca5a5', border: '1px solid rgba(239, 68, 68, 0.3)' };
       case 'PROJECT_MANAGER': return { backgroundColor: 'rgba(245, 158, 11, 0.15)', color: '#fbbf24', border: '1px solid rgba(245, 158, 11, 0.3)' };
       case 'QA': return { backgroundColor: 'rgba(236, 72, 153, 0.15)', color: '#fbcfe8', border: '1px solid rgba(236, 72, 153, 0.3)' };
-      case 'DEVELOPER': return { backgroundColor: 'rgba(139, 92, 246, 0.15)', color: '#ddd6fe', border: '1px solid rgba(139, 92, 246, 0.3)' };
+      case 'DEVELOPER': return { backgroundColor: 'var(--primary-glow)', color: '#ddd6fe', border: '1px solid rgba(139, 92, 246, 0.3)' };
       default: return { backgroundColor: 'rgba(59, 130, 246, 0.15)', color: '#bfdbfe', border: '1px solid rgba(59, 130, 246, 0.3)' };
     }
   };
@@ -169,10 +169,10 @@ const styles = {
     letterSpacing: '-0.03em',
   },
   logoBug: {
-    color: '#ffffff',
+    color: 'var(--text-main)',
   },
   logoDtr: {
-    color: '#8b5cf6',
+    color: 'var(--primary)',
     marginLeft: '0.2rem',
     background: 'rgba(139, 92, 246, 0.1)',
     padding: '0.15rem 0.4rem',
@@ -197,7 +197,7 @@ const styles = {
   navIconBtn: {
     background: 'transparent',
     border: 'none',
-    color: '#9ca3af',
+    color: 'var(--text-muted)',
     fontSize: '1.2rem',
     cursor: 'pointer',
     position: 'relative' as const,
@@ -208,7 +208,7 @@ const styles = {
     top: '-3px',
     right: '-3px',
     backgroundColor: '#ef4444',
-    color: '#ffffff',
+    color: 'var(--text-main)',
     fontSize: '0.65rem',
     fontWeight: 'bold',
     borderRadius: '50%',
@@ -225,7 +225,7 @@ const styles = {
     width: '320px',
     maxHeight: '400px',
     backgroundColor: '#11131c',
-    border: '1px solid rgba(255, 255, 255, 0.08)',
+    border: '1px solid var(--border-color)',
     borderRadius: '12px',
     boxShadow: '0 10px 25px rgba(0,0,0,0.3)',
     overflow: 'hidden',
@@ -251,7 +251,7 @@ const styles = {
   emptyNotifs: {
     padding: '2rem 1rem',
     textAlign: 'center' as const,
-    color: '#6b7280',
+    color: 'var(--text-muted)',
     fontSize: '0.9rem',
   },
   notifItem: {
@@ -266,15 +266,15 @@ const styles = {
   notifTitle: {
     fontSize: '0.85rem',
     fontWeight: 600,
-    color: '#ffffff',
+    color: 'var(--text-main)',
   },
   notifContent: {
     fontSize: '0.75rem',
-    color: '#9ca3af',
+    color: 'var(--text-muted)',
   },
   notifLink: {
     fontSize: '0.75rem',
-    color: '#8b5cf6',
+    color: 'var(--primary)',
     fontWeight: 500,
     alignSelf: 'flex-end',
     marginTop: '0.25rem',
@@ -286,14 +286,14 @@ const styles = {
     alignItems: 'center',
     gap: '0.6rem',
     cursor: 'pointer',
-    color: '#ffffff',
+    color: 'var(--text-main)',
   },
   avatar: {
     width: '28px',
     height: '28px',
     borderRadius: '50%',
-    backgroundColor: '#8b5cf6',
-    color: '#ffffff',
+    backgroundColor: 'var(--primary)',
+    color: 'var(--text-main)',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -303,11 +303,11 @@ const styles = {
   userName: {
     fontSize: '0.9rem',
     fontWeight: 500,
-    color: '#d1d5db',
+    color: 'var(--text-main)',
   },
   arrow: {
     fontSize: '0.6rem',
-    color: '#6b7280',
+    color: 'var(--text-muted)',
   },
   profileDropdown: {
     position: 'absolute' as const,
@@ -315,7 +315,7 @@ const styles = {
     right: 0,
     width: '220px',
     backgroundColor: '#11131c',
-    border: '1px solid rgba(255, 255, 255, 0.08)',
+    border: '1px solid var(--border-color)',
     borderRadius: '12px',
     boxShadow: '0 10px 25px rgba(0,0,0,0.3)',
     overflow: 'hidden',
@@ -327,11 +327,11 @@ const styles = {
   profileName: {
     fontSize: '0.9rem',
     fontWeight: 600,
-    color: '#ffffff',
+    color: 'var(--text-main)',
   },
   profileEmail: {
     fontSize: '0.75rem',
-    color: '#9ca3af',
+    color: 'var(--text-muted)',
   },
   profileBody: {
     padding: '0.5rem',
