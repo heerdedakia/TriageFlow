@@ -220,12 +220,12 @@ export default function GuidedReportClient({ projects, initialProjectId, createI
                 style={{
                   ...styles.stepCircle,
                   backgroundColor: isActive
-                    ? '#0d9488'
+                    ? '#8b5cf6'
                     : isCompleted
-                    ? '#10b981'
+                    ? '#a78bfa'
                     : 'rgba(255,255,255,0.05)',
                   border: isActive
-                    ? '2px solid rgba(13, 148, 136, 0.4)'
+                    ? '2px solid rgba(139, 92, 246, 0.4)'
                     : '1px solid rgba(255,255,255,0.1)',
                 }}
               >
@@ -387,9 +387,9 @@ export default function GuidedReportClient({ projects, initialProjectId, createI
               onDrop={handleDrop}
               style={{
                 ...styles.dropzone,
-                borderColor: dragging || fileInputFocused ? '#0d9488' : 'rgba(255,255,255,0.08)',
-                backgroundColor: dragging || fileInputFocused ? 'rgba(13, 148, 136,0.03)' : 'rgba(255,255,255,0.01)',
-                outline: fileInputFocused ? '2px dashed #0d9488' : 'none',
+                borderColor: dragging || fileInputFocused ? '#8b5cf6' : 'rgba(255,255,255,0.08)',
+                backgroundColor: dragging || fileInputFocused ? 'rgba(139, 92, 246,0.03)' : 'rgba(255,255,255,0.01)',
+                outline: fileInputFocused ? '2px dashed #8b5cf6' : 'none',
               }}
             >
               <div style={styles.dropzoneContent}>
@@ -709,8 +709,8 @@ const styles = {
     alignItems: 'center',
     gap: '0.75rem',
     padding: '0.75rem 1rem',
-    backgroundColor: 'rgba(13, 148, 136, 0.05)',
-    border: '1px solid rgba(13, 148, 136, 0.15)',
+    backgroundColor: 'rgba(139, 92, 246, 0.05)',
+    border: '1px solid rgba(139, 92, 246, 0.15)',
     borderRadius: '8px',
   },
   fileDetailsIcon: {
@@ -789,7 +789,7 @@ const styles = {
   nextBtn: {
     padding: '0.6rem 1.5rem',
     borderRadius: '8px',
-    backgroundColor: '#0d9488',
+    backgroundColor: '#8b5cf6',
     color: '#ffffff',
     border: 'none',
     fontWeight: 600,
@@ -800,13 +800,13 @@ const styles = {
   submitBtn: {
     padding: '0.6rem 1.5rem',
     borderRadius: '8px',
-    backgroundColor: '#10b981',
+    backgroundColor: '#a78bfa',
     color: '#ffffff',
     border: 'none',
     fontWeight: 600,
     fontSize: '0.9rem',
     marginLeft: 'auto',
-    boxShadow: '0 0 10px rgba(16, 185, 129, 0.25)',
+    boxShadow: '0 0 10px rgba(167, 139, 250, 0.25)',
   },
   errorBox: {
     padding: '0.75rem 1rem',

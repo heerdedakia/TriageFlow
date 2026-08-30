@@ -90,7 +90,7 @@ export default function HeaderNav({ user, notifications: initialNotifications }:
                       onClick={() => handleNotifClick(notif.id)}
                       style={{
                         ...styles.notifItem,
-                        backgroundColor: notif.isRead ? 'transparent' : 'rgba(13, 148, 136, 0.05)',
+                        backgroundColor: notif.isRead ? 'transparent' : 'rgba(139, 92, 246, 0.05)',
                       }}
                     >
                       <p style={styles.notifTitle}>{notif.title}</p>
@@ -172,9 +172,9 @@ const styles = {
     color: '#ffffff',
   },
   logoDtr: {
-    color: '#0d9488',
+    color: '#8b5cf6',
     marginLeft: '0.2rem',
-    background: 'rgba(13, 148, 136, 0.1)',
+    background: 'rgba(139, 92, 246, 0.1)',
     padding: '0.15rem 0.4rem',
     borderRadius: '4px',
     fontSize: '0.8rem',
@@ -274,7 +274,7 @@ const styles = {
   },
   notifLink: {
     fontSize: '0.75rem',
-    color: '#0d9488',
+    color: '#8b5cf6',
     fontWeight: 500,
     alignSelf: 'flex-end',
     marginTop: '0.25rem',
@@ -292,7 +292,7 @@ const styles = {
     width: '28px',
     height: '28px',
     borderRadius: '50%',
-    backgroundColor: '#0d9488',
+    backgroundColor: '#8b5cf6',
     color: '#ffffff',
     display: 'flex',
     alignItems: 'center',

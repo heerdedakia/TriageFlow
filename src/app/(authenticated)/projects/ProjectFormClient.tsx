@@ -148,12 +148,12 @@ const styles = {
   submitBtn: {
     padding: '0.6rem 1rem',
     borderRadius: '6px',
-    backgroundColor: '#0d9488',
+    backgroundColor: '#8b5cf6',
     color: '#ffffff',
     fontWeight: 600,
     fontSize: '0.9rem',
     border: 'none',
-    boxShadow: '0 0 10px rgba(13, 148, 136, 0.2)',
+    boxShadow: '0 0 10px rgba(139, 92, 246, 0.2)',
   },
   errorAlert: {
     padding: '0.6rem 0.8rem',
@@ -165,8 +165,8 @@ const styles = {
   },
   successAlert: {
     padding: '0.6rem 0.8rem',
-    backgroundColor: 'rgba(16, 185, 129, 0.1)',
-    border: '1px solid rgba(16, 185, 129, 0.2)',
+    backgroundColor: 'rgba(167, 139, 250, 0.1)',
+    border: '1px solid rgba(167, 139, 250, 0.2)',
     borderRadius: '6px',
     color: '#a7f3d0',
     fontSize: '0.85rem',

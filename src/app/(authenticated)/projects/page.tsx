@@ -136,14 +136,14 @@ const styles = {
     gap: '0.75rem',
   },
   keyBadge: {
-    backgroundColor: 'rgba(13, 148, 136, 0.15)',
+    backgroundColor: 'rgba(139, 92, 246, 0.15)',
     color: '#a5b4fc',
     fontSize: '0.75rem',
     fontWeight: 700,
     padding: '0.2rem 0.5rem',
     borderRadius: '4px',
     letterSpacing: '0.02em',
-    border: '1px solid rgba(13, 148, 136, 0.25)',
+    border: '1px solid rgba(139, 92, 246, 0.25)',
   },
   projectTitle: {
     fontSize: '1.2rem',

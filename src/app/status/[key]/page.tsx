@@ -28,9 +28,9 @@ export default async function PublicStatusPage({ params }: { params: { key: stri
             borderRadius: '999px', 
             fontSize: '0.85rem', 
             fontWeight: 600,
-            backgroundColor: 'rgba(13, 148, 136, 0.1)',
+            backgroundColor: 'rgba(139, 92, 246, 0.1)',
             color: '#818cf8',
-            border: '1px solid rgba(13, 148, 136, 0.2)'
+            border: '1px solid rgba(139, 92, 246, 0.2)'
           }}>
             {issue.status}
           </span>

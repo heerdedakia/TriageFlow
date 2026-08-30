@@ -127,8 +127,8 @@ const styles = {
   },
   successAlert: {
     padding: '0.75rem 1rem',
-    backgroundColor: 'rgba(16, 185, 129, 0.1)',
-    border: '1px solid rgba(16, 185, 129, 0.2)',
+    backgroundColor: 'rgba(167, 139, 250, 0.1)',
+    border: '1px solid rgba(167, 139, 250, 0.2)',
     borderRadius: '8px',
     color: '#a7f3d0',
     fontSize: '0.9rem',
@@ -198,6 +198,6 @@ const styles = {
   loadingText: {
     marginLeft: '0.5rem',
     fontSize: '0.75rem',
-    color: '#0d9488',
+    color: '#8b5cf6',
   },
 };

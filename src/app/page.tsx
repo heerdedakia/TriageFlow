@@ -135,9 +135,9 @@ const styles = {
     color: '#ffffff',
   },
   logoDtr: {
-    color: '#0d9488',
+    color: '#8b5cf6',
     marginLeft: '0.2rem',
-    background: 'rgba(13, 148, 136, 0.1)',
+    background: 'rgba(139, 92, 246, 0.1)',
     padding: '0.2rem 0.5rem',
     borderRadius: '4px',
     fontSize: '0.9rem',
@@ -157,10 +157,10 @@ const styles = {
   registerBtn: {
     padding: '0.5rem 1.25rem',
     borderRadius: '8px',
-    backgroundColor: '#0d9488',
+    backgroundColor: '#8b5cf6',
     color: '#ffffff',
     fontWeight: 500,
-    boxShadow: '0 0 15px rgba(13, 148, 136, 0.3)',
+    boxShadow: '0 0 15px rgba(139, 92, 246, 0.3)',
   },
   main: {
     flexGrow: 1,
@@ -179,14 +179,14 @@ const styles = {
     margin: '0 auto',
   },
   badge: {
-    background: 'linear-gradient(90deg, #0d9488, #10b981)',
+    background: 'linear-gradient(90deg, #8b5cf6, #a78bfa)',
     color: '#ffffff',
     fontSize: '0.75rem',
     fontWeight: 700,
     padding: '0.35rem 0.8rem',
     borderRadius: '100px',
     letterSpacing: '0.05em',
-    boxShadow: '0 0 20px rgba(13, 148, 136, 0.2)',
+    boxShadow: '0 0 20px rgba(139, 92, 246, 0.2)',
   },
   title: {
     fontSize: '3.5rem',
@@ -214,11 +214,11 @@ const styles = {
   primaryCta: {
     padding: '0.75rem 2rem',
     borderRadius: '10px',
-    backgroundColor: '#0d9488',
+    backgroundColor: '#8b5cf6',
     color: '#ffffff',
     fontWeight: 600,
     fontSize: '1.05rem',
-    boxShadow: '0 0 25px rgba(13, 148, 136, 0.4)',
+    boxShadow: '0 0 25px rgba(139, 92, 246, 0.4)',
   },
   secondaryCta: {
     padding: '0.75rem 2rem',
@@ -265,8 +265,8 @@ const styles = {
     lineHeight: '1.5',
   },
   demoSection: {
-    backgroundColor: 'rgba(13, 148, 136, 0.03)',
-    border: '1px solid rgba(13, 148, 136, 0.1)',
+    backgroundColor: 'rgba(139, 92, 246, 0.03)',
+    border: '1px solid rgba(139, 92, 246, 0.1)',
     borderRadius: '16px',
     padding: '3rem',
     display: 'flex',
@@ -308,7 +308,7 @@ const styles = {
   },
   tableTdEmail: {
     padding: '1.2rem 1rem',
-    color: '#10b981',
+    color: '#a78bfa',
   },
   tableTdPass: {
     padding: '1.2rem 1rem',

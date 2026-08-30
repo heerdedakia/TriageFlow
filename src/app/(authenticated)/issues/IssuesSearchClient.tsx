@@ -433,7 +433,7 @@ export default function IssuesSearchClient({
                           switch (sla) {
                             case 'breached': return <span style={{ ...styles.slaBadge, backgroundColor: 'rgba(239, 68, 68, 0.15)', color: '#fca5a5', border: '1px solid rgba(239, 68, 68, 0.3)' }}>🔴 BREACHED</span>;
                             case 'at-risk': return <span style={{ ...styles.slaBadge, backgroundColor: 'rgba(245, 158, 11, 0.15)', color: '#fbbf24', border: '1px solid rgba(245, 158, 11, 0.3)' }}>🟡 AT RISK</span>;
-                            default: return <span style={{ ...styles.slaBadge, backgroundColor: 'rgba(16, 185, 129, 0.15)', color: '#34d399', border: '1px solid rgba(16, 185, 129, 0.3)' }}>🟢 ON TRACK</span>;
+                            default: return <span style={{ ...styles.slaBadge, backgroundColor: 'rgba(167, 139, 250, 0.15)', color: '#34d399', border: '1px solid rgba(167, 139, 250, 0.3)' }}>🟢 ON TRACK</span>;
                           }
                         })()}
                       </td>
@@ -456,7 +456,7 @@ function getStatusColor(status: string) {
     case 'TRIAGED': return '#06b6d4';
     case 'ASSIGNED': return '#8b5cf6';
     case 'IN_PROGRESS': return '#f59e0b';
-    case 'RESOLVED': return '#10b981';
+    case 'RESOLVED': return '#a78bfa';
     case 'VERIFICATION': return '#ec4899';
     default: return '#6b7280';
   }
@@ -531,7 +531,7 @@ const styles = {
   saveFilterSubmitBtn: {
     padding: '0.2rem 0.6rem',
     borderRadius: '4px',
-    backgroundColor: '#0d9488',
+    backgroundColor: '#8b5cf6',
     color: '#ffffff',
     fontSize: '0.75rem',
     fontWeight: 600,

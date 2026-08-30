@@ -338,7 +338,7 @@ export default async function DashboardPage() {
           <h3>Issue Aging</h3>
           <div style={styles.agingGrid}>
             <div style={styles.agingItem}>
-              <span style={{ ...styles.agingBadge, backgroundColor: 'rgba(16, 185, 129, 0.15)', color: '#34d399' }}>Last 24h</span>
+              <span style={{ ...styles.agingBadge, backgroundColor: 'rgba(167, 139, 250, 0.15)', color: '#34d399' }}>Last 24h</span>
               <span style={styles.agingVal}>{newIssuesCount}</span>
             </div>
             <div style={styles.agingItem}>
@@ -401,7 +401,7 @@ function IssueTable({ issues }: { issues: any[] }) {
       case 'TRIAGED': return '#06b6d4';
       case 'ASSIGNED': return '#8b5cf6';
       case 'IN_PROGRESS': return '#f59e0b';
-      case 'RESOLVED': return '#10b981';
+      case 'RESOLVED': return '#a78bfa';
       case 'VERIFICATION': return '#ec4899';
       default: return '#6b7280';
     }
@@ -423,7 +423,7 @@ function IssueTable({ issues }: { issues: any[] }) {
       case 'at-risk':
         return <span style={{ ...styles.slaBadge, backgroundColor: 'rgba(245, 158, 11, 0.15)', color: '#fbbf24', border: '1px solid rgba(245, 158, 11, 0.3)' }}>🟡 AT RISK</span>;
       case 'ok':
-        return <span style={{ ...styles.slaBadge, backgroundColor: 'rgba(16, 185, 129, 0.15)', color: '#34d399', border: '1px solid rgba(16, 185, 129, 0.3)' }}>🟢 ON TRACK</span>;
+        return <span style={{ ...styles.slaBadge, backgroundColor: 'rgba(167, 139, 250, 0.15)', color: '#34d399', border: '1px solid rgba(167, 139, 250, 0.3)' }}>🟢 ON TRACK</span>;
     }
   };
 

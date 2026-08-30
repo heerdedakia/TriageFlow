@@ -63,7 +63,7 @@ export default function WorkspaceClient({
       case 'TRIAGED': return '#06b6d4';
       case 'ASSIGNED': return '#8b5cf6';
       case 'IN_PROGRESS': return '#f59e0b';
-      case 'RESOLVED': return '#10b981';
+      case 'RESOLVED': return '#a78bfa';
       case 'VERIFICATION': return '#ec4899';
       case 'CLOSED': return '#6b7280';
     }
@@ -260,7 +260,7 @@ export default function WorkspaceClient({
                     backgroundColor: isActive
                       ? getStatusColor(status)
                       : isCompleted
-                      ? '#10b981'
+                      ? '#a78bfa'
                       : 'rgba(255,255,255,0.04)',
                     borderColor: isActive ? '#ffffff' : 'transparent',
                     boxShadow: isActive ? `0 0 15px ${getStatusColor(status)}` : 'none',
@@ -281,7 +281,7 @@ export default function WorkspaceClient({
                   <div
                     style={{
                       ...styles.statusConnector,
-                      backgroundColor: index < activeIndex ? '#10b981' : 'rgba(255,255,255,0.06)',
+                      backgroundColor: index < activeIndex ? '#a78bfa' : 'rgba(255,255,255,0.06)',
                     }}
                   />
                 )}
@@ -645,7 +645,7 @@ export default function WorkspaceClient({
                   <span style={{ ...styles.slaBadge, backgroundColor: 'rgba(245, 158, 11, 0.15)', color: '#fbbf24', border: '1px solid rgba(245, 158, 11, 0.3)' }}>🟡 AT RISK</span>
                 )}
                 {slaStatus === 'ok' && (
-                  <span style={{ ...styles.slaBadge, backgroundColor: 'rgba(16, 185, 129, 0.15)', color: '#34d399', border: '1px solid rgba(16, 185, 129, 0.3)' }}>🟢 ON TRACK</span>
+                  <span style={{ ...styles.slaBadge, backgroundColor: 'rgba(167, 139, 250, 0.15)', color: '#34d399', border: '1px solid rgba(167, 139, 250, 0.3)' }}>🟢 ON TRACK</span>
                 )}
               </div>
             </div>
@@ -684,7 +684,7 @@ function getPriorityStyle(pri: string) {
   switch (pri) {
     case 'URGENT': return { backgroundColor: 'rgba(239, 68, 68, 0.15)', color: '#fca5a5' };
     case 'HIGH': return { backgroundColor: 'rgba(245, 158, 11, 0.15)', color: '#fbbf24' };
-    case 'MEDIUM': return { backgroundColor: 'rgba(13, 148, 136, 0.15)', color: '#a5b4fc' };
+    case 'MEDIUM': return { backgroundColor: 'rgba(139, 92, 246, 0.15)', color: '#a5b4fc' };
     default: return { backgroundColor: 'rgba(156, 163, 175, 0.15)', color: '#9ca3af' };
   }
 }
@@ -764,7 +764,7 @@ const styles = {
   transitionBtn: {
     padding: '0.4rem 1rem',
     borderRadius: '6px',
-    backgroundColor: '#0d9488',
+    backgroundColor: '#8b5cf6',
     color: '#ffffff',
     fontWeight: 600,
     fontSize: '0.85rem',
@@ -774,7 +774,7 @@ const styles = {
   transitionBtnGreen: {
     padding: '0.4rem 1rem',
     borderRadius: '6px',
-    backgroundColor: '#10b981',
+    backgroundColor: '#a78bfa',
     color: '#ffffff',
     fontWeight: 600,
     fontSize: '0.85rem',
@@ -878,7 +878,7 @@ const styles = {
   },
   descBlockHeader: {
     fontSize: '0.8rem',
-    color: '#0d9488',
+    color: '#8b5cf6',
     textTransform: 'uppercase' as const,
     letterSpacing: '0.05em',
     fontWeight: 700,
@@ -1049,7 +1049,7 @@ const styles = {
     width: '24px',
     height: '24px',
     borderRadius: '50%',
-    backgroundColor: '#0d9488',
+    backgroundColor: '#8b5cf6',
     color: '#ffffff',
     display: 'flex',
     alignItems: 'center',
@@ -1117,7 +1117,7 @@ const styles = {
     alignSelf: 'flex-end',
     padding: '0.5rem 1.25rem',
     borderRadius: '6px',
-    backgroundColor: '#0d9488',
+    backgroundColor: '#8b5cf6',
     color: '#ffffff',
     fontWeight: 600,
     fontSize: '0.85rem',
