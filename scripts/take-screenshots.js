@@ -2,7 +2,7 @@ const puppeteer = require('puppeteer');
 const fs = require('fs');
 const path = require('path');
 
-const BASE_URL = 'https://triage-flow-8666bnct3-heer-renish-dedakia-s-projects.vercel.app';
+const BASE_URL = 'https://triage-flow-blond.vercel.app';
 
 async function run() {
   const dir = path.join(__dirname, '..', 'docs', 'screenshots');
