@@ -13,9 +13,9 @@
   --color-card-bg: var(--color-bg);
 
   /* Colors */
-  --bg-main: #ffffff;
+  --bg-main: #f1f5f9;
   --bg-card: #ffffff;
-  --bg-card-hover: #f1f5f9;
+  --bg-card-hover: #f8fafc;
   --bg-sidebar: #f8fafc;
   --bg-input: #ffffff;
   
