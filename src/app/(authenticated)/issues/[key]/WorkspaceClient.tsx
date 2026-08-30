@@ -684,7 +684,7 @@ function getPriorityStyle(pri: string) {
   switch (pri) {
     case 'URGENT': return { backgroundColor: 'rgba(239, 68, 68, 0.15)', color: '#fca5a5' };
     case 'HIGH': return { backgroundColor: 'rgba(245, 158, 11, 0.15)', color: '#fbbf24' };
-    case 'MEDIUM': return { backgroundColor: 'rgba(99, 102, 241, 0.15)', color: '#a5b4fc' };
+    case 'MEDIUM': return { backgroundColor: 'rgba(13, 148, 136, 0.15)', color: '#a5b4fc' };
     default: return { backgroundColor: 'rgba(156, 163, 175, 0.15)', color: '#9ca3af' };
   }
 }
@@ -764,7 +764,7 @@ const styles = {
   transitionBtn: {
     padding: '0.4rem 1rem',
     borderRadius: '6px',
-    backgroundColor: '#6366f1',
+    backgroundColor: '#0d9488',
     color: '#ffffff',
     fontWeight: 600,
     fontSize: '0.85rem',
@@ -878,7 +878,7 @@ const styles = {
   },
   descBlockHeader: {
     fontSize: '0.8rem',
-    color: '#6366f1',
+    color: '#0d9488',
     textTransform: 'uppercase' as const,
     letterSpacing: '0.05em',
     fontWeight: 700,
@@ -1049,7 +1049,7 @@ const styles = {
     width: '24px',
     height: '24px',
     borderRadius: '50%',
-    backgroundColor: '#6366f1',
+    backgroundColor: '#0d9488',
     color: '#ffffff',
     display: 'flex',
     alignItems: 'center',
@@ -1117,7 +1117,7 @@ const styles = {
     alignSelf: 'flex-end',
     padding: '0.5rem 1.25rem',
     borderRadius: '6px',
-    backgroundColor: '#6366f1',
+    backgroundColor: '#0d9488',
     color: '#ffffff',
     fontWeight: 600,
     fontSize: '0.85rem',

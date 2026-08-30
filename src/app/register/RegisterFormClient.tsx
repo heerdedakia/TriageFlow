@@ -150,13 +150,13 @@ const styles = {
   submitBtn: {
     padding: '0.75rem 1rem',
     borderRadius: '8px',
-    backgroundColor: '#6366f1',
+    backgroundColor: '#0d9488',
     color: '#ffffff',
     fontWeight: 600,
     fontSize: '1rem',
     border: 'none',
     marginTop: '0.5rem',
-    boxShadow: '0 0 15px rgba(99, 102, 241, 0.3)',
+    boxShadow: '0 0 15px rgba(13, 148, 136, 0.3)',
   },
   errorAlert: {
     padding: '0.75rem 1rem',

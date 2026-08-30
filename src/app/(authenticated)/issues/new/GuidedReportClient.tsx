@@ -220,12 +220,12 @@ export default function GuidedReportClient({ projects, initialProjectId, createI
                 style={{
                   ...styles.stepCircle,
                   backgroundColor: isActive
-                    ? '#6366f1'
+                    ? '#0d9488'
                     : isCompleted
                     ? '#10b981'
                     : 'rgba(255,255,255,0.05)',
                   border: isActive
-                    ? '2px solid rgba(99, 102, 241, 0.4)'
+                    ? '2px solid rgba(13, 148, 136, 0.4)'
                     : '1px solid rgba(255,255,255,0.1)',
                 }}
               >
@@ -387,9 +387,9 @@ export default function GuidedReportClient({ projects, initialProjectId, createI
               onDrop={handleDrop}
               style={{
                 ...styles.dropzone,
-                borderColor: dragging || fileInputFocused ? '#6366f1' : 'rgba(255,255,255,0.08)',
-                backgroundColor: dragging || fileInputFocused ? 'rgba(99,102,241,0.03)' : 'rgba(255,255,255,0.01)',
-                outline: fileInputFocused ? '2px dashed #6366f1' : 'none',
+                borderColor: dragging || fileInputFocused ? '#0d9488' : 'rgba(255,255,255,0.08)',
+                backgroundColor: dragging || fileInputFocused ? 'rgba(13, 148, 136,0.03)' : 'rgba(255,255,255,0.01)',
+                outline: fileInputFocused ? '2px dashed #0d9488' : 'none',
               }}
             >
               <div style={styles.dropzoneContent}>
@@ -709,8 +709,8 @@ const styles = {
     alignItems: 'center',
     gap: '0.75rem',
     padding: '0.75rem 1rem',
-    backgroundColor: 'rgba(99, 102, 241, 0.05)',
-    border: '1px solid rgba(99, 102, 241, 0.15)',
+    backgroundColor: 'rgba(13, 148, 136, 0.05)',
+    border: '1px solid rgba(13, 148, 136, 0.15)',
     borderRadius: '8px',
   },
   fileDetailsIcon: {
@@ -789,7 +789,7 @@ const styles = {
   nextBtn: {
     padding: '0.6rem 1.5rem',
     borderRadius: '8px',
-    backgroundColor: '#6366f1',
+    backgroundColor: '#0d9488',
     color: '#ffffff',
     border: 'none',
     fontWeight: 600,

@@ -531,7 +531,7 @@ const styles = {
   saveFilterSubmitBtn: {
     padding: '0.2rem 0.6rem',
     borderRadius: '4px',
-    backgroundColor: '#6366f1',
+    backgroundColor: '#0d9488',
     color: '#ffffff',
     fontSize: '0.75rem',
     fontWeight: 600,

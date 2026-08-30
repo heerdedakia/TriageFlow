@@ -198,6 +198,6 @@ const styles = {
   loadingText: {
     marginLeft: '0.5rem',
     fontSize: '0.75rem',
-    color: '#6366f1',
+    color: '#0d9488',
   },
 };

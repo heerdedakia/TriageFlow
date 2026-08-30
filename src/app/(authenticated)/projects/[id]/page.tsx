@@ -243,13 +243,13 @@ const styles = {
     gap: '1rem',
   },
   keyBadge: {
-    backgroundColor: 'rgba(99, 102, 241, 0.15)',
+    backgroundColor: 'rgba(13, 148, 136, 0.15)',
     color: '#a5b4fc',
     fontSize: '0.9rem',
     fontWeight: 700,
     padding: '0.25rem 0.65rem',
     borderRadius: '6px',
-    border: '1px solid rgba(99, 102, 241, 0.3)',
+    border: '1px solid rgba(13, 148, 136, 0.3)',
     letterSpacing: '0.02em',
   },
   projectName: {
@@ -308,9 +308,9 @@ const styles = {
   },
   reportCta: {
     padding: '0.5rem 1rem',
-    backgroundColor: 'rgba(99, 102, 241, 0.1)',
+    backgroundColor: 'rgba(13, 148, 136, 0.1)',
     color: '#a5b4fc',
-    border: '1px solid rgba(99, 102, 241, 0.3)',
+    border: '1px solid rgba(13, 148, 136, 0.3)',
     borderRadius: '6px',
     fontSize: '0.85rem',
     fontWeight: 500,

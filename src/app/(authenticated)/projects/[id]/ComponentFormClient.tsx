@@ -133,12 +133,12 @@ const styles = {
   submitBtn: {
     padding: '0.6rem 1rem',
     borderRadius: '6px',
-    backgroundColor: '#6366f1',
+    backgroundColor: '#0d9488',
     color: '#ffffff',
     fontWeight: 600,
     fontSize: '0.9rem',
     border: 'none',
-    boxShadow: '0 0 10px rgba(99, 102, 241, 0.2)',
+    boxShadow: '0 0 10px rgba(13, 148, 136, 0.2)',
   },
   errorAlert: {
     padding: '0.6rem 0.8rem',
